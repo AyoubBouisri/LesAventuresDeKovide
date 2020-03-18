@@ -5,8 +5,8 @@ function CursorObj() {
     // TODO : attendre que l'artiste finit les dessins et les integrer
 
 
-    this.basic = 'grab';
-    this.info = 'zoom-in';
+    this.basic = "assets/handCursor.png";
+    this.info = "assets/magnifier.png";
     this.interaction = 'pointer';
     // STATES FOR NOW -> 0 : basic
     //	 				 1 : info
@@ -14,6 +14,7 @@ function CursorObj() {
     this.state = 0;
 
     this.show = function() {
+
         if (this.state == 0) {
             cursor(this.basic);
         } else if (this.state == 1) {

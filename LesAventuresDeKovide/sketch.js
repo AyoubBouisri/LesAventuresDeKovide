@@ -18,6 +18,7 @@ function preload() {
     lock_img = loadImage("assets/lock.png");
 
     cursor_basic = loadImage("assets/handCursor.png");
+    cursor_info = loadImage("assets/magnifier.png");
 
 }
 
