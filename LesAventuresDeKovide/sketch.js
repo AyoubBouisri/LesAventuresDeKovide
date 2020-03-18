@@ -5,7 +5,7 @@ let cursor_basic, cursor_info;
 // global variables for the first room (office room). disgusting js
 var officeRoom;
 let office_background;
-let screwdriver_img, rope_img, lock_img;
+let screwdriver_img, rope_img, lock_img, inventory_img;
 
 var currentRoom = null;
 
@@ -16,6 +16,7 @@ function preload() {
     screwdriver_img = loadImage("assets/screwDriver.png");
     rope_img = loadImage("assets/rope.png");
     lock_img = loadImage("assets/lock.png");
+    inventory_img = loadImage("assets/inventory.png");
 
     cursor_basic = loadImage("assets/handCursor.png");
     cursor_info = loadImage("assets/magnifier.png");
@@ -49,5 +50,18 @@ function draw() {
 function mouseMoved() {
     if (currentRoom != null) {
         currentRoom.mouseOver(mouseX, mouseY);
+    }
+}
+
+function mouseClicked() {
+    if (currentRoom != null) {
+        currentRoom.mouseClicked(mouseX, mouseY);
+    }
+}
+
+function keyReleased(event) {
+    // Open the inventory by pressing G on the keyboard
+    if (event.code === 'KeyG') {
+        currentRoom.keyReleased();
     }
 }

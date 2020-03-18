@@ -1,9 +1,9 @@
-function Item(posX, posY, width, height, base_image) {
+function Item(posX, posY, width, height, base_image, name) {
     // find a way to inherit from this 
     // plan is to have it as a base class for basic interaction with the cursor
     // simple hover animations etc.
 
-
+    this.name = name;
     this.posX = posX;
     this.posY = posY;
     this.w = width;

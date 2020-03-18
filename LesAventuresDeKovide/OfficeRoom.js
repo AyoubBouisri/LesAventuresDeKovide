@@ -2,10 +2,12 @@ function OfficeRoom() {
     this.backgroundImg = office_background;
 
     // define items hardcoded the fuck out
-    this.screwdriver = new Item(830, 430, 120, 100, screwdriver_img);
-    this.rope = new Item(350, 620, 200, 100, rope_img);
-    this.lock = new Item(180, 360, 80, 80, lock_img)
+    this.screwdriver = new Item(830, 430, 120, 100, screwdriver_img, 'Screwdriver');
+    this.rope = new Item(350, 620, 200, 100, rope_img, 'Rope');
+    this.lock = new Item(180, 360, 80, 80, lock_img, 'Lock')
     this.items = [this.screwdriver, this.rope, this.lock];
+
+    this.inventory = new Inventory(this.items);
 
     this.show = function() {
 
@@ -13,6 +15,10 @@ function OfficeRoom() {
 
         for (var i = 0; i < this.items.length; i++) {
             this.items[i].show();
+        }
+
+        if (this.inventory.isOpened) {
+            this.inventory.show();
         }
     }
 
@@ -35,5 +41,24 @@ function OfficeRoom() {
         // set the cursor back to its original form. Shitty way but ey what can you do
         // see line 31 : 2:43 am
         cursorObj.setState(0);
+    }
+
+    this.mouseClicked = function(mouseX, mouseY) {
+        // Temporary
+        // Add an item in the inventory on mouseClick
+        for (var i = 0; i < this.items.length; i++) {
+            if (this.items[i].contains(mouseX, mouseY)) {
+                console.log(this.items[i].name + ' has been added to your inventory!');
+                this.inventory.addItem(this.items[i]);
+            }
+        }
+    }
+
+    this.keyReleased = function() {
+        if (this.inventory.isOpened) {
+            this.inventory.isOpened = false;
+        } else {
+            this.inventory.isOpened = true;
+        }
     }
 }
