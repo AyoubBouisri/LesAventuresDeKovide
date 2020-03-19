@@ -1,4 +1,4 @@
-function Item(posX, posY, width, height, base_image, name) {
+function Item(posX, posY, width, height, base_image, name, can_pick_up) {
     // find a way to inherit from this 
     // plan is to have it as a base class for basic interaction with the cursor
     // simple hover animations etc.
@@ -8,6 +8,7 @@ function Item(posX, posY, width, height, base_image, name) {
     this.posY = posY;
     this.w = width;
     this.h = height;
+    this.pickable = can_pick_up;
     // set up the image
     this.base_image = base_image;
 
@@ -44,6 +45,13 @@ function Item(posX, posY, width, height, base_image, name) {
                 this.base_image.resize(this.w, this.h);
                 image(this.base_image, this.posX, this.posY);
 
+            }
+        } else {
+            fill(0, 200, 0, 50);
+            // rect(this.posX, this.posY, this.w, this.h);
+            if (this.is_hovered) {
+                fill(0, 200, 0, 200);
+                ellipse(this.posX + this.w / 2, this.posY + this.h / 2, 30, 30);
             }
         }
     }

@@ -9,6 +9,9 @@ let screwdriver_img, rope_img, lock_img, inventory_img;
 
 var currentRoom = null;
 
+//INVENTORY
+var inventory;
+
 function preload() {
     // * for some reason these end up as global variables used in the defined class 
     // so maybe we dont need to define global variables up there ?? investigate
@@ -28,6 +31,9 @@ function setup() {
     // set up canvas and base variables
     createCanvas(1000, 923);
 
+    //setup inventory
+    inventory = new Inventory();
+
     // setup rooms and current room
     officeRoom = new OfficeRoom();
     currentRoom = officeRoom;
@@ -44,6 +50,10 @@ function draw() {
     // put drawing code here
     background(100);
     currentRoom.show();
+
+
+    this.inventory.show();
+
 }
 
 
@@ -54,14 +64,17 @@ function mouseMoved() {
 }
 
 function mouseClicked() {
-    if (currentRoom != null) {
-        currentRoom.mouseClicked(mouseX, mouseY);
-    }
-}
-
-function keyReleased(event) {
-    // Open the inventory by pressing G on the keyboard
-    if (event.code === 'KeyG') {
-        currentRoom.keyReleased();
+    // interaction outside the inventory
+    var itemsTemp = currentRoom.items
+    for (var i = 0; i < itemsTemp.length; i++) {
+        if (itemsTemp[i].contains(mouseX, mouseY)) {
+            // Add an item in the inventory on mouseClick (temporary)
+            if (itemsTemp[i].pickable) {
+                const item = new Item(itemsTemp[i].posX, itemsTemp[i].posY, 145, 100, itemsTemp[i].base_image, itemsTemp[i].name);
+                inventory.addItem(item);
+                itemsTemp.splice(i, 1);
+            }
+            // TODO : Interaction with other objects
+        }
     }
 }

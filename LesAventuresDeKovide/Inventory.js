@@ -3,24 +3,33 @@ function Inventory() {
     this.items = [];
     this.isOpened = false;
 
-    this.addItem = function (item) {
-        if (!this.items.includes(item)) {
+    this.contains_item = function(item) {
+        for (var i = 0; i < this.items.length; i++) {
+            if (this.items.name === item.name) {
+                return true;
+            }
+        }
+        return false;
+    }
+    this.addItem = function(item) {
+        if (!this.contains_item(item)) {
             this.items.push(item);
         }
+
     }
 
-    this.removeItem = function (item) {
+    this.removeItem = function(item) {
         this.items.splice(this.items.indexOf(item), 1);
     }
 
-    this.interact = function (item) {
+    this.interact = function(item) {
         // Interact with an item currently in the inventory
         if (this.items.includes(item)) {
             console.log('You are interacting with a ' + item.name);
         }
     }
 
-    this.show = function () {
+    this.show = function() {
         image(inventory_img, 10, 650);
 
         for (let item of this.items) {
@@ -31,7 +40,7 @@ function Inventory() {
     }
 
     // Hardcoded item position in the inventory
-    this.getInventoryPosition = function (index, item) {
+    this.getInventoryPosition = function(index, item) {
         const height = 770;
         switch (index) {
             case 0:
