@@ -48,6 +48,11 @@ function Item(posX, posY, width, height, base_image, name) {
         }
     }
 
+    this.setPositions = function(posX, posY) {
+        this.posX = posX;
+        this.posY = posY;
+    }
+
 
 
 
