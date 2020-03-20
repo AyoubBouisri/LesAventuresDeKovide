@@ -29,7 +29,7 @@ function DialogueBox(w, h, message, img, button_on_click_func) {
         this.button = null;
     }
 
-    this.show = function() {
+    this.show = function () {
 
         image(this.bg_img, this.x, this.y);
         this.buttonClose.show();
@@ -68,7 +68,7 @@ function DialogueBox(w, h, message, img, button_on_click_func) {
 
     }
 
-    this.mouseOver = function(mouseX, mouseY) {
+    this.mouseOver = function (mouseX, mouseY) {
         if (this.buttonClose.contains(mouseX, mouseY)) {
             this.buttonClose.is_hovered = true;
 
@@ -90,7 +90,7 @@ function DialogueBox(w, h, message, img, button_on_click_func) {
         }
     }
 
-    this.click = function(mouseX, mouseY) {
+    this.click = function (mouseX, mouseY) {
         if (this.contains(mouseX, mouseY)) {
             // if on close button close the dialogue
             if (this.buttonClose.contains(mouseX, mouseY)) {
@@ -102,16 +102,17 @@ function DialogueBox(w, h, message, img, button_on_click_func) {
         }
     }
 
-    this.contains = function(x, y) {
+    this.contains = function (x, y) {
         if (x >= this.x && x <= (this.x + this.w) && y >= this.y && y <= this.y + this.h)
             return true;
         return false;
     }
 
-    this.setItem = function(item) {
+    this.setItem = function (item) {
         this.item = item;
         if (this.button != null) {
             this.button.item = item;
         }
     }
+
 }

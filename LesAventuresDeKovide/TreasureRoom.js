@@ -1,6 +1,6 @@
-function PetshopRoom() {
-    this.backgroundImg = petshop_background;
-    this.name = 'Animalerie';
+function TreasureRoom() {
+    this.backgroundImg = treasure_background;
+    this.name = 'Trésor';
     this.items = [];
     // Create a bunch of dialogue boxes and link them with the right objects
     // one dialogue box per object should do the trick see DialogueBox.js
@@ -46,5 +46,4 @@ function PetshopRoom() {
     this.mouseReleased = function (mouseX, mouseY) {
 
     }
-
 }

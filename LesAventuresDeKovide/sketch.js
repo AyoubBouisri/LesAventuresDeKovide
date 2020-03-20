@@ -7,7 +7,7 @@ let cursor_basic, cursor_info;
 var itemHeld = null;
 
 // global variables for the first room (office room). disgusting js
-var officeRoom, petshopRoom;
+var officeRoom, petshopRoom, treasureRoom;
 let office_background;
 let screwdriver_img, rope_img, lock_img, inventory_img;
 
@@ -21,6 +21,7 @@ function preload() {
     // so maybe we dont need to define global variables up there ?? investigate
     office_background = loadImage("assets/officeBackground.png");
     petshop_background = loadImage("assets/petshopBackground.png");
+    treasure_background = loadImage("assets/treasureBackground.png");
     screwdriver_img = loadImage("assets/screwDriver.png");
     rope_img = loadImage("assets/rope.png");
     lock_img = loadImage("assets/lock.png");
@@ -47,6 +48,7 @@ function setup() {
     // setup rooms and current room
     officeRoom = new OfficeRoom();
     petshopRoom = new PetshopRoom();
+    treasureRoom = new TreasureRoom();
     currentRoom = officeRoom;
 
     dragMode = false;
@@ -134,9 +136,16 @@ function mouseDragged() {
 
 }
 
-function mouseReleased(event) {
+// This function will be call after mouseDragged
+function mouseReleased() {
     if (itemHeld) {
         currentRoom.mouseReleased(mouseX, mouseY);
         itemHeld = null;
+    }
+}
+
+function keyReleased() {
+    if (currentRoom.name === 'Bureau') {
+        currentRoom.keyReleased(event);
     }
 }

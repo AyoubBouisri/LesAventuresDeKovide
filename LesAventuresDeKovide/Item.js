@@ -71,11 +71,4 @@ function Item(posX, posY, width, height, base_image, name, can_pick_up, dialogue
         this.posY = posY;
     }
 
-    this.changeDialogue = function (dialogue) {
-        this.dialogueBox = dialogue;
-    }
-
-
-
-
 }
