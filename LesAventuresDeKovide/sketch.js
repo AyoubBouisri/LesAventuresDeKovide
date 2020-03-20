@@ -51,8 +51,6 @@ function setup() {
     treasureRoom = new TreasureRoom();
     currentRoom = officeRoom;
 
-    dragMode = false;
-
 
     // set up cursor
     cursorObj = new CursorObj();

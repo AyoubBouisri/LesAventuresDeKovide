@@ -40,7 +40,7 @@ function Item(posX, posY, width, height, base_image, name, can_pick_up, dialogue
             return true;
         }
         return false;
-    }
+    };
 
     this.show = function () {
         // Not very efficient method but as long as it doesnt lag we keep it this way
@@ -64,11 +64,11 @@ function Item(posX, posY, width, height, base_image, name, can_pick_up, dialogue
                 ellipse(this.posX + this.w / 2, this.posY + this.h / 2, 30, 30);
             }
         }
-    }
+    };
 
     this.setPositions = function (posX, posY) {
         this.posX = posX;
         this.posY = posY;
-    }
+    };
 
 }

@@ -14,12 +14,12 @@ function TreasureRoom() {
         currentRoom.items.splice(index, 1);
         //close dialogue
         currentDialogue = null;
-    }
+    };
 
 
     this.show = function () {
         image(this.backgroundImg, 0, 0);
-    }
+    };
 
     this.mouseOver = function (mouseX, mouseY) {
         // method called everytime a mouse is moved. 

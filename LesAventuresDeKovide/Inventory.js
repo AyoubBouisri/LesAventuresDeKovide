@@ -5,13 +5,12 @@ function Inventory() {
     this.posY = 650;
 
     this.contains_item = function (item) {
-        for (var i = 0; i < this.items.length; i++) {
-            if (this.items.name === item.name) {
-                return true;
-            }
+        if (this.items.includes(item)) {
+            return true;
         }
         return false;
-    }
+    };
+
     this.addItem = function (item) {
         if (!this.contains_item(item)) {
             if (item.name === 'rope') {
@@ -23,18 +22,18 @@ function Inventory() {
             this.items.push(item);
         }
 
-    }
+    };
 
     this.removeItem = function (item) {
         this.items.splice(this.items.indexOf(item), 1);
-    }
+    };
 
     this.interact = function (item) {
         // Interact with an item currently in the inventory
         if (this.items.includes(item)) {
             console.log('You are interacting with a ' + item.name);
         }
-    }
+    };
 
     this.show = function () {
         image(inventory_img, 20, this.posY);
@@ -46,7 +45,7 @@ function Inventory() {
             }
             item.show();
         }
-    }
+    };
 
     // Hardcoded item position in the inventory
     this.getInventoryPosition = function (index, item) {
@@ -68,6 +67,6 @@ function Inventory() {
                 item.setPositions(740, height);
                 break;
         }
-    }
+    };
 
 }

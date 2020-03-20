@@ -66,7 +66,7 @@ function DialogueBox(w, h, message, img, button_on_click_func) {
         }
 
 
-    }
+    };
 
     this.mouseOver = function (mouseX, mouseY) {
         if (this.buttonClose.contains(mouseX, mouseY)) {
@@ -88,7 +88,7 @@ function DialogueBox(w, h, message, img, button_on_click_func) {
         } else {
             cursorObj.setState(0);
         }
-    }
+    };
 
     this.click = function (mouseX, mouseY) {
         if (this.contains(mouseX, mouseY)) {
@@ -100,19 +100,19 @@ function DialogueBox(w, h, message, img, button_on_click_func) {
                 this.button.click();
             }
         }
-    }
+    };
 
     this.contains = function (x, y) {
         if (x >= this.x && x <= (this.x + this.w) && y >= this.y && y <= this.y + this.h)
             return true;
         return false;
-    }
+    };
 
     this.setItem = function (item) {
         this.item = item;
         if (this.button != null) {
             this.button.item = item;
         }
-    }
+    };
 
 }

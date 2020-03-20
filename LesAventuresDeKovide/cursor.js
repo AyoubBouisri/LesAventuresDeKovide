@@ -13,7 +13,7 @@ function CursorObj() {
     //                   2 : interaction ? To be done
     this.state = 0;
 
-    this.show = function() {
+    this.show = function () {
 
         if (this.state == 0) {
             cursor(this.basic);
@@ -22,11 +22,11 @@ function CursorObj() {
         } else if (this.state == 2) {
             cursor(this.interaction);
         }
-    }
+    };
 
-    this.setState = function(state) {
+    this.setState = function (state) {
         this.state = state;
         this.show();
-    }
+    };
 
 }

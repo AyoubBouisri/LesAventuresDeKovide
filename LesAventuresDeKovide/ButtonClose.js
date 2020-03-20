@@ -6,9 +6,9 @@ function ButtonClose(x, y) {
 
     this.is_hovered = false;
     this.image = closeBtn_img;
-    this.hovered_img = this.image.get()
+    this.hovered_img = this.image.get();
     this.hovered_img.resize(60, 60);
-    this.show = function() {
+    this.show = function () {
         if (this.is_hovered) {
 
             var x = this.x - 5;
@@ -20,11 +20,12 @@ function ButtonClose(x, y) {
             image(this.image, this.x, this.y);
         }
 
-    }
+    };
 
-    this.contains = function(x, y) {
-        if (x >= this.x && x <= (this.x + this.w) && y >= this.y && y <= this.y + this.w)
+    this.contains = function (x, y) {
+        if (x >= this.x && x <= (this.x + this.w) && y >= this.y && y <= this.y + this.w) {
             return true;
+        }
         return false;
-    }
+    };
 }
