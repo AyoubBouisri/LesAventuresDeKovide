@@ -35,13 +35,14 @@ function Item(posX, posY, width, height, base_image, name, can_pick_up, dialogue
 
     this.is_hovered = false;
 
-    this.contains = function(x, y) {
-        if (x >= this.posX && x <= (this.posX + this.w) && y >= this.posY && y <= this.posY + this.h)
+    this.contains = function (x, y) {
+        if (x >= this.posX && x <= (this.posX + this.w) && y >= this.posY && y <= this.posY + this.h) {
             return true;
+        }
         return false;
     }
 
-    this.show = function() {
+    this.show = function () {
         // Not very efficient method but as long as it doesnt lag we keep it this way
         if (this.base_image != null) {
             if (this.is_hovered) {
@@ -65,9 +66,13 @@ function Item(posX, posY, width, height, base_image, name, can_pick_up, dialogue
         }
     }
 
-    this.setPositions = function(posX, posY) {
+    this.setPositions = function (posX, posY) {
         this.posX = posX;
         this.posY = posY;
+    }
+
+    this.changeDialogue = function (dialogue) {
+        this.dialogueBox = dialogue;
     }
 
 

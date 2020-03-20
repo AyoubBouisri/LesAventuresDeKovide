@@ -5,7 +5,9 @@ function OfficeRoom() {
     var dialogue_w = 900;
     var dialogue_h = 500;
     basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
-    var pickup_func = function(old_item) {
+
+    // Dialog buttons
+    var pickup_func = function (old_item) {
         console.log(old_item);
         inventory.addItem(old_item);
         index = currentRoom.items.indexOf(old_item);
@@ -13,8 +15,16 @@ function OfficeRoom() {
         //close dialogue
         currentDialogue = null;
     }
+
+    var next = function () {
+        currentRoom = petshopRoom;
+        currentDialogue = null;
+    }
+
     screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on sait jamais quand il pourra me servir. Je vais pas oublier de le ramener quand j\'aurais terminé ! ', screwdriver_img, pickup_func);
     rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir la ... Quelqu\'un l\'a peut-être oublié ici. Pourquoi pas la prendre et lui redonner plus-tard ! ', rope_img, pickup_func);
+    grille_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Une grille! Quel beau moyen de voyager dans une autre salle sans vu ni connu. Mais.. comment l\'ouvrir? ', grille_img, null);
+    open_grille_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah tiens! J\'ai réussi à retirer la grille avec le tournevis. Ce petit raccourci m\'amène vers une autre salle.. Devrais-je y aller? ', grille_img, next);
 
     // define items hardcoded the fuck out
 
@@ -25,14 +35,12 @@ function OfficeRoom() {
 
     this.library = new Item(260, 200, 130, 370, null, 'library', false, basic_dialogue);
     this.periodicTable = new Item(410, 270, 80, 80, null, 'periodic table', false, basic_dialogue);
-    this.grille = new Item(800, 530, 120, 40, null, 'grille', false, basic_dialogue);
+    this.grille = new Item(800, 530, 120, 40, null, 'grille', false, grille_dialogue);
 
     this.items = [this.grille, this.screwdriver, this.rope, this.lock, this.library, this.periodicTable];
 
 
-
-
-    this.show = function() {
+    this.show = function () {
 
         image(this.backgroundImg, 0, 0);
 
@@ -43,32 +51,39 @@ function OfficeRoom() {
 
     }
 
-    this.mouseOver = function(mouseX, mouseY) {
-        this.mouseOver = function(mouseX, mouseY) {
-            // method called everytime a mouse is moved. 
-            // Every office object needs to hve it. maybe should of made a base class ...
+    this.mouseOver = function (mouseX, mouseY) {
+        // method called everytime a mouse is moved. 
+        // Every office object needs to hve it. maybe should of made a base class ...
 
-            var something_is_hovered = false;
-            for (var i = 0; i < this.items.length; i++) {
-                if (this.items[i].contains(mouseX, mouseY)) {
-                    cursorObj.setState(1);
-                    this.items[i].is_hovered = true;
-                    something_is_hovered = true;
-                } else {
-                    this.items[i].is_hovered = false;
-                }
-
-
+        var something_is_hovered = false;
+        for (var i = 0; i < this.items.length; i++) {
+            if (this.items[i].contains(mouseX, mouseY)) {
+                cursorObj.setState(1);
+                this.items[i].is_hovered = true;
+                something_is_hovered = true;
+            } else {
+                this.items[i].is_hovered = false;
             }
 
-            if (!something_is_hovered) {
-                cursorObj.setState(0);
+
+        }
+
+        if (!something_is_hovered) {
+            cursorObj.setState(0);
+        }
+    }
+
+    this.mouseReleased = function (mouseX, mouseY) {
+        if (itemHeld.name === 'screwdriver') {
+            let grille_index = this.items.indexOf(this.grille);
+            if (this.items[grille_index].contains(mouseX, mouseY)) {
+                this.items[grille_index].changeDialogue(open_grille_dialogue);
+                inventory.removeItem(itemHeld); // Should we remove the item after using it?
             }
         }
     }
 
-
-    this.keyReleased = function() {
+    this.keyReleased = function () {
 
     }
 }

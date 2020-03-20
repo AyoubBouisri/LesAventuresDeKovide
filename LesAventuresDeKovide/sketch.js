@@ -4,8 +4,10 @@ WIDTH = 1000;
 var cursorObj;
 let cursor_basic, cursor_info;
 
+var itemHeld = null;
+
 // global variables for the first room (office room). disgusting js
-var officeRoom;
+var officeRoom, petshopRoom;
 let office_background;
 let screwdriver_img, rope_img, lock_img, inventory_img;
 
@@ -18,9 +20,11 @@ function preload() {
     // * for some reason these end up as global variables used in the defined class 
     // so maybe we dont need to define global variables up there ?? investigate
     office_background = loadImage("assets/officeBackground.png");
+    petshop_background = loadImage("assets/petshopBackground.png");
     screwdriver_img = loadImage("assets/screwDriver.png");
     rope_img = loadImage("assets/rope.png");
     lock_img = loadImage("assets/lock.png");
+    grille_img = loadImage("assets/grille.png");
     inventory_img = loadImage("assets/inventory.png");
 
     dialogue_img = loadImage("assets/dialogue.png");
@@ -42,7 +46,10 @@ function setup() {
 
     // setup rooms and current room
     officeRoom = new OfficeRoom();
+    petshopRoom = new PetshopRoom();
     currentRoom = officeRoom;
+
+    dragMode = false;
 
 
     // set up cursor
@@ -83,7 +90,7 @@ function mouseMoved() {
 
 function mouseClicked() {
     // interaction outside the inventory
-    var itemsTemp = currentRoom.items
+    var itemsTemp = currentRoom.items;
 
     if (currentDialogue != null) {
         // A dialogue box is open, interact with that and the inventory nothing else
@@ -105,5 +112,31 @@ function mouseClicked() {
             }
         }
     }
+}
 
+function mouseDragged() {
+    var itemsTemp = inventory.items;
+    var offset = {
+        x: 50,
+        y: 10
+    };
+    if (itemHeld === null) {
+        for (let item of itemsTemp) {
+            if (item.contains(mouseX, mouseY)) {
+                itemHeld = item;
+                return;
+            }
+        }
+    } else {
+        itemHeld.setPositions(mouseX - offset.x, mouseY - offset.y);
+    }
+
+
+}
+
+function mouseReleased(event) {
+    if (itemHeld) {
+        currentRoom.mouseReleased(mouseX, mouseY);
+        itemHeld = null;
+    }
 }
