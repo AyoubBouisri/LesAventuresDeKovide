@@ -17,7 +17,7 @@ function Inventory() {
             if (item.name === 'rope') {
                 console.log('XD');
                 item.is_hovered = false;
-                item.w = item.w - 50;
+                item.w = item.w - 55;
                 item.h = item.h - 10;
             }
             this.items.push(item);
