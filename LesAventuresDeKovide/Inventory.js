@@ -2,6 +2,7 @@ function Inventory() {
 
     this.items = [];
     this.isOpened = false;
+    this.posY = 650;
 
     this.contains_item = function(item) {
         for (var i = 0; i < this.items.length; i++) {
@@ -30,7 +31,7 @@ function Inventory() {
     }
 
     this.show = function() {
-        image(inventory_img, 10, 650);
+        image(inventory_img, 10, this.posY);
 
         for (let item of this.items) {
             const index = this.items.indexOf(item);
