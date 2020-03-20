@@ -83,7 +83,7 @@ function DialogueBox(w, h, message, img, button_on_click_func) {
             }
         }
 
-        if (this.buttonClose.is_hovered || this.button.is_hovered) {
+        if (this.buttonClose.is_hovered || this.button != null && this.button.is_hovered) {
             cursorObj.setState(2);
         } else {
             cursorObj.setState(0);
