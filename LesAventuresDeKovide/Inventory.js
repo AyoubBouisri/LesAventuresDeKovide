@@ -14,6 +14,12 @@ function Inventory() {
     }
     this.addItem = function(item) {
         if (!this.contains_item(item)) {
+            if (item.name === 'rope') {
+                console.log('XD');
+                item.is_hovered = false;
+                item.w = item.w - 50;
+                item.h = item.h - 10;
+            }
             this.items.push(item);
         }
 
