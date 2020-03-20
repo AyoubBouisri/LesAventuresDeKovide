@@ -19,6 +19,7 @@ function Item(posX, posY, width, height, base_image, name, can_pick_up, dialogue
 
 
     this.dialogueBox = dialogueBox;
+    this.dialogueBox.setItem(this);
 
     if (this.base_image != null) {
         this.base_image.resize(this.w, this.h);

@@ -5,10 +5,20 @@ function OfficeRoom() {
     var dialogue_w = 900;
     var dialogue_h = 500;
     basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
-    screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on sait jamais quand il pourra me servir. Je vais pas oublier de le ramener quand j\'aurais terminé ! ', screwdriver_img);
-    rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir la ... Quelqu\'un l\'a peut-être oublié ici. Pourquoi pas la prendre et lui redonner plus-tard ! ', rope_img);
+    var pickup_func = function(old_item) {
+        console.log(old_item);
+        inventory.addItem(old_item);
+        index = currentRoom.items.indexOf(old_item);
+        currentRoom.items.splice(index, 1);
+        //close dialogue
+        currentDialogue = null;
+    }
+    screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on sait jamais quand il pourra me servir. Je vais pas oublier de le ramener quand j\'aurais terminé ! ', screwdriver_img, pickup_func);
+    rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir la ... Quelqu\'un l\'a peut-être oublié ici. Pourquoi pas la prendre et lui redonner plus-tard ! ', rope_img, pickup_func);
 
     // define items hardcoded the fuck out
+
+
     this.screwdriver = new Item(830, 430, 120, 100, screwdriver_img, 'screwdriver', true, screwdriver_dialogue);
     this.rope = new Item(350, 620, 200, 100, rope_img, 'rope', true, rope_dialogue);
     this.lock = new Item(180, 360, 80, 80, lock_img, 'lock', false, basic_dialogue)

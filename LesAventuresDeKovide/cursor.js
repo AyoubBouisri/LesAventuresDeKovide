@@ -7,7 +7,7 @@ function CursorObj() {
 
     this.basic = "assets/handCursor.png";
     this.info = "assets/magnifier.png";
-    this.interaction = 'pointer';
+    this.interaction = "assets/cursor_point.png";
     // STATES FOR NOW -> 0 : basic
     //	 				 1 : info
     //                   2 : interaction ? To be done

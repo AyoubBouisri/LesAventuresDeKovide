@@ -25,6 +25,7 @@ function preload() {
 
     dialogue_img = loadImage("assets/dialogue.png");
     closeBtn_img = loadImage("assets/closeBtn.png");
+    button_img = loadImage("assets/button.png");
 
     cursor_basic = loadImage("assets/handCursor.png");
     cursor_info = loadImage("assets/magnifier.png");
