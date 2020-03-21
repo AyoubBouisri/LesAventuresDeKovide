@@ -8,7 +8,7 @@ function OfficeRoom() {
     var password = '';
     basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
     // Dialog buttons
-    var pickup_func = function (old_item) {
+    var pickup_func = function(old_item) {
         console.log(old_item);
         inventory.addItem(old_item);
         index = currentRoom.items.indexOf(old_item);
@@ -16,20 +16,20 @@ function OfficeRoom() {
         //close dialogue
         currentDialogue = null;
     }
-    var goto_petshop_func = function () {
+    var goto_petshop_func = function() {
         currentRoom = petshopRoom;
         currentDialogue = null;
     }
-    var lock_guess_func = function () {
-        if (password !== 'KIM') {
+    var lock_guess_func = function() {
+        password.toLowerCase();
+        if (password !== 'kim') {
             currentDialogue = lock_guess_dialogue;
         }
     }
-    var goto_treasure_func = function () {
+    var goto_treasure_func = function() {
         currentRoom = treasureRoom;
         currentDialogue = null;
     }
-
     screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on sait jamais quand il pourra me servir. Je vais pas oublier de le ramener quand j\'aurais terminé ! ', screwdriver_img, pickup_func);
     rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir la ... Quelqu\'un l\'a peut-être oublié ici. Pourquoi pas la prendre et lui redonner plus-tard ! ', rope_img, pickup_func);
     periodic_table_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'On dirait bien que c’est les 36 premiers éléments qui importe. J’imagine que chaque élément correspond à un numéro.\n Ex: Na = 11 ', periodic_table_img, null);
@@ -51,7 +51,7 @@ function OfficeRoom() {
     this.items = [this.grille, this.screwdriver, this.rope, this.lock, this.library, this.periodicTable];
 
 
-    this.show = function () {
+    this.show = function() {
         image(this.backgroundImg, 0, 0);
 
         for (var i = 0; i < this.items.length; i++) {
@@ -59,7 +59,7 @@ function OfficeRoom() {
         }
     }
 
-    this.mouseOver = function (mouseX, mouseY) {
+    this.mouseOver = function(mouseX, mouseY) {
         // method called everytime a mouse is moved. 
         // Every office object needs to hve it. maybe should of made a base class ...
 
@@ -79,7 +79,7 @@ function OfficeRoom() {
         }
     }
 
-    this.mouseReleased = function (mouseX, mouseY) {
+    this.mouseReleased = function(mouseX, mouseY) {
         if (itemHeld.name === 'screwdriver') {
             let grille_index = this.items.indexOf(this.grille);
             if (this.items[grille_index].contains(mouseX, mouseY)) {
@@ -89,11 +89,13 @@ function OfficeRoom() {
         }
     }
 
-    this.keyReleased = function (event) {
+    this.keyReleased = function(event) {
         // Lock code dialogue
         if (currentDialogue === lock_guess_dialogue) {
+
             password += event.key;
-            if (password !== 'KIM') {
+            password.toLowerCase();
+            if (password !== 'kim') {
                 switch (password.length) {
                     case 1:
                         currentDialogue.message = "Entrer un code :\n " + password[0] + " ____ ____";
@@ -105,7 +107,7 @@ function OfficeRoom() {
                         currentDialogue.message = "Entrer un code :\n " + password[0] + "   " + password[1] + "   " + password[2];
                         break;
                 }
-                if (password.length >= 3 && password !== 'KIM') {
+                if (password.length >= 3 && password !== 'kim') {
                     currentDialogue.message = "Entrer un code :\n    INCORRECT";
                     password = '';
                 }
