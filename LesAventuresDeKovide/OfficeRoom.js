@@ -5,7 +5,6 @@ function OfficeRoom() {
     // one dialogue box per object should do the trick see DialogueBox.js
     var dialogue_w = 900;
     var dialogue_h = 500;
-    var guessMode = false;
     var password = '';
     basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
     // Dialog buttons
@@ -26,25 +25,28 @@ function OfficeRoom() {
             currentDialogue = lock_guess_dialogue;
         }
     }
-    var lock_success_func = function () {
+    var goto_treasure_func = function () {
         currentRoom = treasureRoom;
         currentDialogue = null;
     }
+
     screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on sait jamais quand il pourra me servir. Je vais pas oublier de le ramener quand j\'aurais terminé ! ', screwdriver_img, pickup_func);
     rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir la ... Quelqu\'un l\'a peut-être oublié ici. Pourquoi pas la prendre et lui redonner plus-tard ! ', rope_img, pickup_func);
+    periodic_table_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'On dirait bien que c’est les 36 premiers éléments qui importe. J’imagine que chaque élément correspond à un numéro.\n Ex: Na = 11 ', periodic_table_img, null);
+    library_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah, une bien drôle de machine. Je crois que le livre nous indique comment la « nourrir ». ', library_img, null);
     grille_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Une grille! Quel beau moyen de voyager dans une autre salle ni vu ni connu. Mais.. comment l\'ouvrir? ', grille_img, null);
     grille_open_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah tiens! J\'ai réussi à retirer la grille avec le tournevis. Mais je n\'arrive pas bien à voir où ce petit couloir sombre va m\'amener.. Devrais-je y aller? ', grille_img, goto_petshop_func);
     lock_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Le trésor du médecin devrait se trouver derrière cette porte. J\'en suis convaincu! Mmm.. cette porte semble être barrée par un cadenas. Un code à trois lettres?? ', lock_img, lock_guess_func);
     lock_guess_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n ____ ____ ____', lock_img, null);
-    lock_success_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n  K     I     M\n\n Le cadenas est ouvert! ', lock_img, lock_success_func);
+    lock_success_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n  K     I     M\n\n Le cadenas est ouvert! ', lock_img, goto_treasure_func);
 
 
     // define items hardcoded the fuck out
     this.screwdriver = new Item(830, 430, 120, 100, screwdriver_img, 'screwdriver', true, screwdriver_dialogue);
     this.rope = new Item(350, 620, 200, 100, rope_img, 'rope', true, rope_dialogue);
     this.lock = new Item(180, 360, 80, 80, lock_img, 'lock', false, lock_dialogue);
-    this.library = new Item(260, 200, 130, 370, null, 'library', false, basic_dialogue);
-    this.periodicTable = new Item(410, 270, 80, 80, null, 'periodic table', false, basic_dialogue);
+    this.library = new Item(260, 200, 130, 370, null, 'library', false, library_dialogue);
+    this.periodicTable = new Item(410, 270, 80, 80, null, 'periodic table', false, periodic_table_dialogue);
     this.grille = new Item(800, 530, 120, 40, null, 'grille', false, grille_dialogue);
     this.items = [this.grille, this.screwdriver, this.rope, this.lock, this.library, this.periodicTable];
 

@@ -22,11 +22,18 @@ function preload() {
     office_background = loadImage("assets/officeBackground.png");
     petshop_background = loadImage("assets/petshopBackground.png");
     treasure_background = loadImage("assets/treasureBackground.png");
+
+    inventory_img = loadImage("assets/inventory.png");
     screwdriver_img = loadImage("assets/screwDriver.png");
     rope_img = loadImage("assets/rope.png");
     lock_img = loadImage("assets/lock.png");
     grille_img = loadImage("assets/grille.png");
-    inventory_img = loadImage("assets/inventory.png");
+    periodic_table_img = loadImage("assets/periodicTable.png");
+    library_img = loadImage("assets/library.png");
+    green_barrel_img = loadImage("assets/greenBarrel.png");
+    yellow_barrel_img = loadImage("assets/yellowBarrel.png");
+    red_barrel_img = loadImage("assets/redBarrel.png");
+
 
     dialogue_img = loadImage("assets/dialogue.png");
     closeBtn_img = loadImage("assets/closeBtn.png");
@@ -49,7 +56,7 @@ function setup() {
     officeRoom = new OfficeRoom();
     petshopRoom = new PetshopRoom();
     treasureRoom = new TreasureRoom();
-    currentRoom = officeRoom;
+    currentRoom = petshopRoom;
 
 
     // set up cursor
@@ -142,8 +149,19 @@ function mouseReleased() {
     }
 }
 
-function keyReleased() {
+function keyPressed(event) {
+    if (event.code === 'Space') {
+        event.preventDefault(); // Stop the page from scrolling down if space bar is pressed
+    }
+}
+
+function keyReleased(event) {
     if (currentRoom.name === 'Bureau') {
         currentRoom.keyReleased(event);
+    }
+
+    if (event.code === 'Space') {
+        (inventory.isOpened) ? inventory.isOpened = false : inventory.isOpened = true;
+        
     }
 }

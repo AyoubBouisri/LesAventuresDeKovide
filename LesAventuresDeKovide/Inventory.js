@@ -1,7 +1,7 @@
 function Inventory() {
 
     this.items = [];
-    this.isOpened = false;
+    this.isOpened = true;
     this.posY = 650;
 
     this.contains_item = function (item) {
@@ -9,6 +9,15 @@ function Inventory() {
             return true;
         }
         return false;
+    };
+
+    this.contains_item_name = function (name) {
+        for (let item of this.items){
+            if (item.name === name) {
+                return item;
+            }
+        }
+        return null;
     };
 
     this.addItem = function (item) {
@@ -36,14 +45,16 @@ function Inventory() {
     };
 
     this.show = function () {
-        image(inventory_img, 20, this.posY);
-
-        for (let item of this.items) {
-            const index = this.items.indexOf(item);
-            if (itemHeld === null) {
-                this.getInventoryPosition(index, item);
+        if (this.isOpened) {
+            image(inventory_img, 20, this.posY);
+    
+            for (let item of this.items) {
+                const index = this.items.indexOf(item);
+                if (itemHeld === null) {
+                    this.getInventoryPosition(index, item);
+                }
+                item.show();
             }
-            item.show();
         }
     };
 
