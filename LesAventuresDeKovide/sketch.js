@@ -33,6 +33,8 @@ function preload() {
     green_barrel_img = loadImage("assets/greenBarrel.png");
     yellow_barrel_img = loadImage("assets/yellowBarrel.png");
     red_barrel_img = loadImage("assets/redBarrel.png");
+    machine_img = loadImage("assets/machine.png");
+
 
 
     dialogue_img = loadImage("assets/dialogue.png");

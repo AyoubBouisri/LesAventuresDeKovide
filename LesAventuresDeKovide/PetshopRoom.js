@@ -2,6 +2,7 @@ function PetshopRoom() {
     this.backgroundImg = petshop_background;
     this.name = 'Animalerie';
     this.enter_petshop = false;
+    this.has_barrel = false;
 
     // Create a bunch of dialogue boxes and link them with the right objects
     // one dialogue box per object should do the trick see DialogueBox.js
@@ -37,13 +38,18 @@ function PetshopRoom() {
     boatman_knot_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Défi : Utilise ta corde à noeud pour faire un noeud de batelier.\n Quand tu as réussis, clique sur le bouton et poursuis l’aventure.', rope_img, boatman_knot_func);
     grille_goback_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je peux retourner au bureau grâce à mon noeud de batelier! Devrais-je y retourner ? ', grille_img, goto_office_func);
 
-    this.greenBarrel = new Item(220, 270, 110, 150, green_barrel_img, 'baril biologique', true, basic_dialogue);
-    this.redBarrel = new Item(350, 270, 110, 150, red_barrel_img, 'baril chimique', true, basic_dialogue);
-    this.yellowBarrel = new Item(280, 310, 110, 150, yellow_barrel_img, 'baril radioactif', true, basic_dialogue);
-    this.computer = new Item(630, 590, 210, 130, null, 'ordinateur', false, basic_dialogue);
     this.grille = new Item(730, 40, 190, 100, null, 'grille', false, rope_missing_dialogue);
+    this.greenBarrel = new Item(220, 270, 110, 150, green_barrel_img, 'greenbarrel', true, basic_dialogue);
+    this.redBarrel = new Item(350, 270, 110, 150, red_barrel_img, 'redbarrel', true, basic_dialogue);
+    this.yellowBarrel = new Item(280, 310, 110, 150, yellow_barrel_img, 'yellowbarrel', true, basic_dialogue);
+    this.machine = new Item(580, 100, 470, 460, machine_img, 'machine', false, basic_dialogue);
+    this.computer = new Item(630, 590, 210, 130, null, 'computer', false, basic_dialogue);
+    this.keypad = new Item(560, 175, 70, 95, null, 'keypad', false, basic_dialogue);
+    this.keypad = new Item(560, 175, 70, 95, null, 'keypad', false, basic_dialogue);
 
-    this.items = [this.grille, this.greenBarrel, this.redBarrel, this.yellowBarrel, this.computer];
+
+
+    this.items = [this.grille, this.greenBarrel, this.redBarrel, this.yellowBarrel, this.machine, this.computer, this.keypad];
 
 
     this.show = function () {
@@ -99,6 +105,10 @@ function PetshopRoom() {
                 currentDialogue = grille_dialogue;
             }
         }
+    }
+
+    this.takeBarrel = function () {
+
     }
 
 }
