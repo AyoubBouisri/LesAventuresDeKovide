@@ -25,11 +25,11 @@ function PetshopRoom() {
 
     var has_rope_func = function () {
         currentDialogue = boatman_knot_dialogue;
+        inventory.removeItem(inventory[0]);
     }
 
     var boatman_knot_func = function () {
         currentDialogue = null;
-        inventory.removeItem(inventory[0]);
     }
 
     rope_missing_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'J\'ai réussi à atteindre la nouvelle salle! Oh non.. la grille est trop haute pour sortir, mais comment descendre? Je pense avoir aperçu une corde dans le bureau. Je devrais y retourner pour le prendre!', grille_img , goto_office_func);
@@ -95,6 +95,8 @@ function PetshopRoom() {
             // Return to the office room if challenge successfull
             if (!inventory.contains_item_name('rope')) {
                 this.grille.dialogueBox = grille_goback_dialogue;
+            } else {
+                currentDialogue = grille_dialogue;
             }
         }
     }
