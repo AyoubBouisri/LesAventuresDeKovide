@@ -3,6 +3,8 @@ function PetshopRoom() {
     this.name = 'Animalerie';
     this.enter_petshop = false;
     var password = '';
+    this.gameOver = false;
+
     // Create a bunch of dialogue boxes and link them with the right objects
     // one dialogue box per object should do the trick see DialogueBox.js
     var dialogue_w = 900;
@@ -105,6 +107,9 @@ function PetshopRoom() {
 
 
     this.show = function() {
+        if (this.gameOver) {
+            currentDialogue = machine_explosion_dialogue;
+        }
         image(this.backgroundImg, 0, 0);
         for (var i = 0; i < this.items.length; i++) {
             this.items[i].show();
@@ -154,6 +159,7 @@ function PetshopRoom() {
             } else if (itemHeld.name === 'redbarrel' || itemHeld.name === 'yellowbarrel') {
                 currentDialogue = machine_explosion_dialogue;
                 this.items[machine_index].dialogueBox = machine_explosion_dialogue;
+                this.gameOver = true;
                 inventory.removeItem(itemHeld);
             }
         }

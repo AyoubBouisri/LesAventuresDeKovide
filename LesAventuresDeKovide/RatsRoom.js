@@ -1,6 +1,7 @@
 function RatsRoom() {
     this.backgroundImg = cage_background;
     this.name = 'Cage';
+    this.gameOver = false;
     // Create a bunch of dialogue boxes and link them with the right objects
     // one dialogue box per object should do the trick see DialogueBox.js
     var dialogue_w = 900;
@@ -27,6 +28,7 @@ function RatsRoom() {
     }
 
     rat_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Quel rat devrais-je donner à boire avec ma fiole ? ', null);
+    rat_after_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Et si j\'avais nourrit une autre souris, que serait-il passé ? ', null);
     kim_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Wow! La souris va super bien. Le vaccin a fonctionné. Quel indice permettrait d\'ouvrir la salle au trésor.', kim_img, goto_petshop_func, 'Retourner');
     dead_rat_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ouff... ce n’était pas la bonne souris. Il n’y a plus de vaccin. Ne reste plus qu’à retourner dans la salle d’attente, mais pas de trésor.', dead_mouse_img, reset_game_func, 'Réessayer');
 
@@ -67,6 +69,10 @@ function RatsRoom() {
         if (has_fiole) {
             this.activeInteractions();
         }
+
+        if (this.gameOver) {
+            currentDialogue = dead_rat_dialogue;
+        }
     }
 
     this.mouseOver = function (mouseX, mouseY) {
@@ -93,8 +99,10 @@ function RatsRoom() {
         if (itemHeld.name === 'fiole') {
             if (this.items[kim_index].contains(mouseX, mouseY)) {
                 this.items[kim_index].dialogueBox = kim_dialogue;
+                this.changeRatDialog();
                 inventory.removeItem(itemHeld);
             } else if (this.feedBadRat()){
+                this.gameOver = true;
                 inventory.removeItem(itemHeld);
             }
         }
@@ -117,6 +125,14 @@ function RatsRoom() {
             }
         }
         return false;
+    }
+
+    this.changeRatDialog = function () {
+        for (let rat of this.alldeadrats) {
+            let index = this.items.indexOf(rat);
+            this.items[index].dialogueBox = rat_after_dialogue;
+        }
+
     }
 
     this.keyReleased = function(key) {
