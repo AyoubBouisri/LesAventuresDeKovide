@@ -37,6 +37,9 @@ function preload() {
     machine_open_img = loadImage("assets/machineOpen.png");
     usb_img = loadImage("assets/usb.png");
     computer_screen_img = loadImage("assets/computerScreen.png");
+    keypad_img = loadImage("assets/keypad.png");
+
+    explosion_img = loadImage("assets/boom.png");
 
     laboratory_background = loadImage("assets/laboratory_background.png");
     book_img = loadImage("assets/book.png");
@@ -166,7 +169,7 @@ function keyPressed(event) {
 }
 
 function keyReleased(event) {
-    if (currentRoom.name === 'Bureau') {
+    if (currentRoom && currentRoom.name === 'Bureau' || currentRoom && currentRoom.name === 'Animalerie') {
         currentRoom.keyReleased(event);
     }
 

@@ -1,5 +1,7 @@
 function Inventory() {
 
+    var barrels = ['greenbarrel', 'redbarrel', 'yellowbarrel'];
+
     this.items = [];
     this.isOpened = true;
     this.posY = 650;
@@ -23,10 +25,18 @@ function Inventory() {
     this.addItem = function (item) {
         if (!this.contains_item(item)) {
             if (item.name === 'rope') {
-                console.log('XD');
                 item.is_hovered = false;
                 item.w = item.w - 55;
                 item.h = item.h - 10;
+            }
+            if (barrels.includes(item.name)) {
+                item.is_hovered = false;
+                item.w = item.w - 15;
+                item.h = item.h - 15;
+            }
+
+            if (item.name === 'usb') {
+                item = new Item(740, 355, 120, 120, usb_img, 'usb', true, usb_dialogue);
             }
             this.items.push(item);
         }
@@ -63,7 +73,11 @@ function Inventory() {
         const height = 770;
         switch (index) {
             case 0:
-                item.setPositions(130, height);
+                if (barrels.includes(item.name)) {
+                    item.setPositions(160, 760);
+                } else {
+                    item.setPositions(130, height);
+                }
                 break;
             case 1:
                 item.setPositions(285, height);

@@ -30,6 +30,7 @@ function OfficeRoom() {
         currentRoom = treasureRoom;
         currentDialogue = null;
     }
+
     screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on ne sait jamais quand il pourra me servir. Je ne vais pas oublier de le ramener quand j\'aurai terminé ! ', screwdriver_img, pickup_func, 'Ramasser');
     rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir là ... Quelqu\'un l\'a peut-être oubliée ici. Pourquoi ne pas la prendre et lui redonner plus tard ! ', rope_img, pickup_func, 'Ramasser');
     periodic_table_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'On dirait bien que c’est les 36 premiers éléments qui importe. J’imagine que chaque élément correspond à un numéro.\n Ex: Na = 11 ', periodic_table_img, null);
@@ -81,19 +82,11 @@ function OfficeRoom() {
 
     this.mouseReleased = function(mouseX, mouseY) {
         if (itemHeld.name === 'screwdriver') {
+            console.log(currentDialogue);
+            console.log(grille_dialogue);
             let grille_index = this.items.indexOf(this.grille);
-
-            if (currentDialogue != null) {
-                //if (currentDialogue.message.startsWith('Une')) {
-                if (currentDialogue.contains(mouseX, mouseY)) {
-
-                    currentDialogue = grille_open_dialogue;
-                    this.items[grille_index].dialogueBox = grille_open_dialogue;
-                    inventory.removeItem(itemHeld); // Sh
-                }
-            }
-
-            if (this.items[grille_index].contains(mouseX, mouseY)) {
+            if (currentDialogue === grille_dialogue && currentDialogue.contains(mouseX, mouseY) || this.items[grille_index].contains(mouseX, mouseY)) {
+                currentDialogue = grille_open_dialogue;
                 this.items[grille_index].dialogueBox = grille_open_dialogue;
                 inventory.removeItem(itemHeld); // Should we remove the item after using it?
             }
@@ -105,9 +98,7 @@ function OfficeRoom() {
     this.keyReleased = function(event) {
         // Lock code dialogue
         if (currentDialogue === lock_guess_dialogue) {
-
-            password += event.key;
-            password.toLowerCase();
+            password += event.key.toLowerCase();
             if (password !== 'kim') {
                 switch (password.length) {
                     case 1:
