@@ -9,7 +9,7 @@ function PetshopRoom() {
     var dialogue_h = 500;
     basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
 
-    var pickup_func = function (old_item) {
+    var pickup_func = function(old_item) {
         console.log(old_item);
         inventory.addItem(old_item);
         index = currentRoom.items.indexOf(old_item);
@@ -18,24 +18,24 @@ function PetshopRoom() {
         currentDialogue = null;
     }
 
-    var pickup_barrel_func = function (old_item) {
+    var pickup_barrel_func = function(old_item) {
         inventory.addItem(old_item);
         index = currentRoom.items.indexOf(old_item);
         currentRoom.items.splice(index, 1);
         currentDialogue = null;
     }
 
-    var goto_office_func = function () {
+    var goto_office_func = function() {
         currentRoom = officeRoom;
         currentDialogue = null;
     }
 
-    var has_rope_func = function () {
+    var has_rope_func = function() {
         currentDialogue = boatman_knot_dialogue;
         inventory.removeItem(inventory[0]);
     }
 
-    var boatman_knot_func = function () {
+    var boatman_knot_func = function() {
         currentDialogue = null;
     }
 
@@ -73,7 +73,7 @@ function PetshopRoom() {
     this.items = [this.grille, this.greenBarrel, this.redBarrel, this.yellowBarrel, this.machine, this.computer, this.keypad];
 
 
-    this.show = function () {
+    this.show = function() {
         image(this.backgroundImg, 0, 0);
         for (var i = 0; i < this.items.length; i++) {
             this.items[i].show();
@@ -83,7 +83,7 @@ function PetshopRoom() {
         this.takeBarrel();
     }
 
-    this.mouseOver = function (mouseX, mouseY) {
+    this.mouseOver = function(mouseX, mouseY) {
         // method called everytime a mouse is moved. 
         // Every office object needs to hve it. maybe should of made a base class ...
         var something_is_hovered = false;
@@ -101,7 +101,7 @@ function PetshopRoom() {
         }
     }
 
-    this.mouseReleased = function (mouseX, mouseY) {
+    this.mouseReleased = function(mouseX, mouseY) {
         // Barrel + Machine
         let machine_index = this.items.indexOf(this.machine);
         if (this.items[machine_index] && this.items[machine_index].contains(mouseX, mouseY)) {
@@ -128,7 +128,7 @@ function PetshopRoom() {
 
     }
 
-    this.ropeChallenge = function () {
+    this.ropeChallenge = function() {
         if (!this.enter_petshop) {
             // Boatman's knot challenge
             if (inventory.contains_item_name('rope')) {
@@ -148,7 +148,7 @@ function PetshopRoom() {
         }
     }
 
-    this.takeBarrel = function () {
+    this.takeBarrel = function() {
         // Force user to take one barrel only
         if (inventory.contains_item(this.greenBarrel) || inventory.contains_item(this.redBarrel) || inventory.contains_item(this.yellowBarrel)) {
             this.greenBarrel.dialogueBox = geen_barrel_dialogue;

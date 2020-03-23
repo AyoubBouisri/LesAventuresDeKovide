@@ -7,7 +7,7 @@ let cursor_basic, cursor_info;
 var itemHeld = null;
 
 // global variables for the first room (office room). disgusting js
-var officeRoom, petshopRoom, treasureRoom;
+var officeRoom, petshopRoom, treasureRoom, laboratoryRoom;
 let office_background;
 let screwdriver_img, rope_img, lock_img, inventory_img;
 
@@ -38,6 +38,11 @@ function preload() {
     usb_img = loadImage("assets/usb.png");
     computer_screen_img = loadImage("assets/computerScreen.png");
 
+    laboratory_background = loadImage("assets/laboratory_background.png");
+    book_img = loadImage("assets/book.png");
+    tableau_img = loadImage("assets/tableau_img.png");
+    fiole_img = loadImage("assets/fiole.png");
+
 
     dialogue_img = loadImage("assets/dialogue.png");
     closeBtn_img = loadImage("assets/closeBtn.png");
@@ -60,7 +65,8 @@ function setup() {
     officeRoom = new OfficeRoom();
     petshopRoom = new PetshopRoom();
     treasureRoom = new TreasureRoom();
-    currentRoom = officeRoom;
+    laboratoryRoom = new LaboratoryRoom();
+    currentRoom = laboratoryRoom;
 
 
     // set up cursor
@@ -165,7 +171,7 @@ function keyReleased(event) {
     }
 
     if (event.code === 'Space') {
-        (inventory.isOpened) ? inventory.isOpened = false : inventory.isOpened = true;
-        
+        (inventory.isOpened) ? inventory.isOpened = false: inventory.isOpened = true;
+
     }
 }
