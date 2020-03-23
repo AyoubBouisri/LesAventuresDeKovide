@@ -37,7 +37,6 @@ function PetshopRoom() {
 
 
     var close_dialogue_func = function() {
-
         currentDialogue = null;
     }
 
@@ -212,8 +211,9 @@ function PetshopRoom() {
                         currentDialogue.message = "Entrer un code :\n " + password[0] + "   " + password[1] + "   " + password[2] + "   " + password[3];
                         break;
                 }
+
                 if (password.length >= 4 && password !== '6780') {
-                    currentDialogue.message = "Entrer un code :\n    INCORRECT";
+                    currentDialogue.message = "Entrer un code :\n  ____ ____ ____ ____ \nINCORRECT";
                     password = '';
                 }
             } else {

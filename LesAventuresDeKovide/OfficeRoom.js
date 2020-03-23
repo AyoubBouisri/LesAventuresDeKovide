@@ -112,7 +112,7 @@ function OfficeRoom() {
                         break;
                 }
                 if (password.length >= 3 && password !== 'kim') {
-                    currentDialogue.message = "Entrer un code :\n    INCORRECT";
+                    currentDialogue.message = "Entrer un code :\n ____ ____ ____\n INCORRECT";
                     password = '';
                 }
             } else {

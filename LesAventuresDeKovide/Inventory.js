@@ -6,15 +6,15 @@ function Inventory() {
     this.isOpened = true;
     this.posY = 650;
 
-    this.contains_item = function (item) {
+    this.contains_item = function(item) {
         if (this.items.includes(item)) {
             return true;
         }
         return false;
     };
 
-    this.contains_item_name = function (name) {
-        for (let item of this.items){
+    this.contains_item_name = function(name) {
+        for (let item of this.items) {
             if (item.name === name) {
                 return item;
             }
@@ -22,7 +22,7 @@ function Inventory() {
         return null;
     };
 
-    this.addItem = function (item) {
+    this.addItem = function(item) {
         if (!this.contains_item(item)) {
             if (item.name === 'rope') {
                 item.is_hovered = false;
@@ -43,21 +43,24 @@ function Inventory() {
 
     };
 
-    this.removeItem = function (item) {
+    this.removeItem = function(item) {
         this.items.splice(this.items.indexOf(item), 1);
     };
 
-    this.interact = function (item) {
+    this.interact = function(item) {
         // Interact with an item currently in the inventory
         if (this.items.includes(item)) {
             console.log('You are interacting with a ' + item.name);
         }
     };
 
-    this.show = function () {
+    this.show = function() {
         if (this.isOpened) {
+
+            fill(254, 229, 153, 200);
+            rect(50, this.posY + 30, 300, 50);
             image(inventory_img, 20, this.posY);
-    
+
             for (let item of this.items) {
                 const index = this.items.indexOf(item);
                 if (itemHeld === null) {
@@ -65,11 +68,13 @@ function Inventory() {
                 }
                 item.show();
             }
+
+
         }
     };
 
     // Hardcoded item position in the inventory
-    this.getInventoryPosition = function (index, item) {
+    this.getInventoryPosition = function(index, item) {
         const height = 770;
         switch (index) {
             case 0:
