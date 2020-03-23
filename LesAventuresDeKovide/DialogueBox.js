@@ -248,6 +248,19 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
                 var text_x = this.x + this.w / 2 - 70;
                 var text_y = this.y + this.h / 2 - text_height / 2;
                 fill(254, 229, 153);
+            } else if (currentDialogue === fiole_dialogue) {
+                this.image = img.get();
+                var img_w = this.w * 0.2;
+                var img_h = this.h * 0.4;
+                this.image.resize(img_w, img_h);
+                var img_x = this.x + 120;
+                var img_y = this.y + this.h / 2 - this.image.height / 2;
+                image(this.image, img_x, img_y);
+                var text_width = this.w / 2 - 70;
+                var text_height = this.h / 2;
+                var text_x = this.x + this.w / 2 - 70;
+                var text_y = this.y + this.h / 2 - text_height / 2;
+                fill(254, 229, 153);
             } else {
                 this.image = img.get();
                 this.image.resize(this.w / 3, this.h / 3);
