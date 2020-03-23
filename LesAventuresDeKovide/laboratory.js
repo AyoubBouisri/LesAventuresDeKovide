@@ -29,6 +29,7 @@ function LaboratoryRoom() {
 
     function retourner_animalerie() {
         currentRoom = petshopRoom;
+        currentDialogue = null;
     }
 
     sortie_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'C\'est la direction pour retourner à l\'animalerie ou le médecin garde ses rats.', null, retourner_animalerie, 'Sortir');

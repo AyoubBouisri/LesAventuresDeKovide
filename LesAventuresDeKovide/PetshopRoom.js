@@ -36,7 +36,7 @@ function PetshopRoom() {
     }
 
 
-    var close_dialogue_func = function () {
+    var close_dialogue_func = function() {
 
         currentDialogue = null;
     }
@@ -48,7 +48,7 @@ function PetshopRoom() {
         }
     }
     var goto_lab_func = function() {
-        // currentRoom = labRoom;
+        currentRoom = laboratoryRoom;
         currentDialogue = null;
     }
 
@@ -225,4 +225,3 @@ function PetshopRoom() {
     }
 
 }
-
