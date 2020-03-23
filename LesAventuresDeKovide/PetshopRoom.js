@@ -1,7 +1,7 @@
 function PetshopRoom() {
     this.backgroundImg = petshop_background;
     this.name = 'Animalerie';
-    this.enter_petshop = true;
+    this.enter_petshop = false;
 
     // Create a bunch of dialogue boxes and link them with the right objects
     // one dialogue box per object should do the trick see DialogueBox.js
