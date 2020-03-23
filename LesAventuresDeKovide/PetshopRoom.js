@@ -106,6 +106,7 @@ function PetshopRoom() {
         this.takeBarrel();
 
         // Fix dialogue picture
+        grille_goback_dialogue.setItem(this.grille);
         green_barrel_dialogue.setItem(this.greenBarrel);
         red_barrel_dialogue.setItem(this.redBarrel);
         yellow_barrel_dialogue.setItem(this.yellowBarrel);
@@ -192,11 +193,11 @@ function PetshopRoom() {
     }
 
 
-    this.keyReleased = function(event) {
+    this.keyReleased = function(key) {
         // Keypad code dialogue
         let numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        if (currentDialogue === keypad_guess_dialogue && numbers.includes(event.key)) {
-            password += event.key;
+        if (currentDialogue === keypad_guess_dialogue && numbers.includes(key)) {
+            password += key;
             if (password !== '6780') {
                 switch (password.length) {
                     case 1:

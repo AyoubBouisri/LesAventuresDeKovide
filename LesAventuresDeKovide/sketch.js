@@ -168,13 +168,10 @@ function keyPressed(event) {
     }
 }
 
-function keyReleased(event) {
-    if (currentRoom && currentRoom.name === 'Bureau' || currentRoom && currentRoom.name === 'Animalerie') {
-        currentRoom.keyReleased(event);
-    }
-
+function keyReleased() {
     if (event.code === 'Space') {
         (inventory.isOpened) ? inventory.isOpened = false: inventory.isOpened = true;
-
+    } else if (currentRoom) {
+        currentRoom.keyReleased(key);
     }
 }

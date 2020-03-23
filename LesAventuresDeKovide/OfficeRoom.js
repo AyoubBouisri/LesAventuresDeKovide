@@ -33,7 +33,7 @@ function OfficeRoom() {
 
     screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on ne sait jamais quand il pourra me servir. Je ne vais pas oublier de le ramener quand j\'aurai terminé ! ', screwdriver_img, pickup_func, 'Ramasser');
     rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir là ... Quelqu\'un l\'a peut-être oubliée ici. Pourquoi ne pas la prendre et lui redonner plus tard ! ', rope_img, pickup_func, 'Ramasser');
-    periodic_table_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'On dirait bien que c’est les 36 premiers éléments qui importe. J’imagine que chaque élément correspond à un numéro.\n Ex: Na = 11 ', periodic_table_img, null);
+    periodic_table_dialogue = new DialogueBox(dialogue_w, 650, 'On dirait bien que c’est les 36 premiers éléments qui importe. J’imagine que chaque élément correspond à un numéro.\n Ex: Na = 11 ', periodic_table_img, null);
     library_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah, une bien drôle de machine. Je crois que le livre nous indique comment la « nourrir ». ', library_img, null);
     grille_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Une grille! Quel beau moyen de voyager dans une autre salle ni vu ni connu. Mais.. comment l\'ouvrir? ', grille_img, null);
     grille_open_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah tiens! J\'ai réussi à retirer la grille avec le tournevis. Mais je n\'arrive pas bien à voir où ce petit couloir sombre va m\'amener.. Devrais-je y aller? ', grille_img, goto_petshop_func, 'Entrer');
@@ -58,6 +58,12 @@ function OfficeRoom() {
         for (var i = 0; i < this.items.length; i++) {
             this.items[i].show();
         }
+
+        // Fix dialogue picture
+        grille_open_dialogue.setItem(this.grille);
+
+        lock_guess_dialogue.setItem(this.lock);
+        lock_success_dialogue.setItem(this.lock);
     }
 
     this.mouseOver = function(mouseX, mouseY) {
@@ -95,10 +101,10 @@ function OfficeRoom() {
         }
     }
 
-    this.keyReleased = function(event) {
+    this.keyReleased = function(key) {
         // Lock code dialogue
-        if (currentDialogue === lock_guess_dialogue) {
-            password += event.key.toLowerCase();
+        if (keyCode >= 65 && keyCode <= 90 && currentDialogue === lock_guess_dialogue) {
+            password += key.toLowerCase();
             if (password !== 'kim') {
                 switch (password.length) {
                     case 1:
