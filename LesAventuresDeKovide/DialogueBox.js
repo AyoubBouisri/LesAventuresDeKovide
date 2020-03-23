@@ -6,7 +6,7 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
     this.image = img;
     this.item;
 
-    this.bg_img = dialogue_img;
+    this.bg_img = dialogue_img.get();
     this.bg_img.resize(this.w, this.h);
 
     this.button_on_click_func = button_on_click_func;
@@ -34,7 +34,7 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
 
         image(this.bg_img, this.x, this.y);
         this.buttonClose.show();
-        if (this.image != null) {
+        if (this.image != null || this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait') || this.message.startsWith('C\'est la direction')) {
             // draw image on the left and text on the right
             var barrel = ['greenbarrel', 'redbarrel', 'yellowbarrel'];
             if (this.item && this.item.name === 'usb') {
@@ -57,6 +57,46 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
                 textAlign(CENTER, CENTER);
                 text(this.message, text_x + text_width / 2, text_y + text_height / 2, text_width, text_height);
                 rectMode(CORNER);
+
+
+             } else if (this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait') || this.message.startsWith('C\'est la direction')) {
+                // show only text 
+
+                var text_width = this.w - 200;
+                var text_height = this.h / 2;
+                var text_x = this.x + this.w / 2 - text_width / 2;
+                var text_y = this.y + this.h / 2 - text_height / 2;
+
+            } else if (this.item != null && this.item.name === 'book' || this.item.name === 'tableau') {
+                // show big image with text under
+                this.image = img.get();
+                if (this.item.name === 'book') {
+                    var img_w = this.w - 400;
+                    var img_h = this.h / 2;
+                    this.image.resize(img_w, img_h);
+                    var img_x = this.x + this.w / 2 - img_w / 2;
+                    var img_y = this.y + 90;
+                } else {
+                    var img_w = this.w - 200;
+                    var img_h = this.h - 250;
+                    this.image.resize(img_w, img_h);
+                    var img_x = this.x + this.w / 2 - img_w / 2;
+                    var img_y = this.y + 90;
+                }
+
+                image(this.image, img_x, img_y);
+
+                var text_width = this.w - 150;
+                var text_height = this.h / 7;
+                var text_x = this.x + 70;
+                if (this.item.name === 'tableau') {
+                    var text_y = img_y + img_h - 40;
+                } else {
+                    var text_y = img_y + img_h;
+
+                }
+
+
 
             } else if (this.item && this.item.name === 'keypad') {
                 this.image = img.get();
@@ -172,6 +212,7 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
                 fill(0, 0, 0);
                 text(this.message, text_x, text_y, text_width, text_height);
 
+
             } else {
                 this.image = img.get();
                 this.image.resize(this.w / 3, this.h / 3);
@@ -194,7 +235,9 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
                 textAlign(CENTER, CENTER);
                 text(this.message, text_x + text_width / 2, text_y + text_height / 2, text_width, text_height);
                 rectMode(CORNER);
+
             }
+
 
 
         }
@@ -235,7 +278,7 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
             if (this.buttonClose.contains(mouseX, mouseY)) {
                 currentDialogue = null;
                 this.buttonClose.is_hovered = false;
-            } else if (this.button.contains(mouseX, mouseY)) {
+            } else if (this.button != null && this.button.contains(mouseX, mouseY)) {
                 this.button.click();
             }
         }
