@@ -17,6 +17,7 @@ function LaboratoryRoom() {
 
     function ramasser_fiole() {
         // ajouter fiole a linventaire
+        has_fiole = true;
         basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
         this.fiole = new Item(0, 0, 100, 100, fiole_img, 'fiole', false, basic_dialogue);
 
@@ -32,18 +33,18 @@ function LaboratoryRoom() {
         currentDialogue = null;
     }
 
-    sortie_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'C\'est la direction pour retourner à l\'animalerie ou le médecin garde ses rats.', null, retourner_animalerie, 'Sortir');
-    defi_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Kovide entre ses mains dans les gants en caoutchouc, mais ses bras sont trop petits pour atteindre la fiole. Mets tes mitaineset fait un noeud coulant dans ta corde à noeud. Quand tu as réussis, clique sur <<Réussi>> !', null, reussir_defi, 'Réussi');
-    fiole_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Avec le noeud coulant, Kovide a précipité la fiole dans le bac pour récupération. Wow aucune goute n\'a été perdu. Kovide est un super scout !', fiole_img, ramasser_fiole, 'Ramasser');
+    sortie_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'C\'est la direction pour retourner à l\'animalerie où le médecin garde ses rats.', null, retourner_animalerie, 'Sortir');
+    defi_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Kovide entre ses mains dans les gants en caoutchouc, mais ses bras sont trop petits pour atteindre la fiole. Mets tes mitaines et fait un noeud coulant dans ta corde à noeud. Quand tu as réussis, clique sur « Réussi » !', null, reussir_defi, 'Réussi');
+    fiole_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Avec le noeud coulant, Kovide a précipité la fiole dans le bac pour récupération. Wow aucunee goutte n\'a été perdue. Kovide est un super scout !', fiole_img, ramasser_fiole, 'Ramasser');
     hotte_vide_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'On dirait bien une hotte de laboratoire qui permet l\'extraction des vapeurs toxiques des produits utilisés lors des manipulations du médecin.');
 
     book_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Hein ! Il a donné un nom à chaque rat, mais il est fou ce médecin', book_img);
-    tableau_dialogue = new DialogueBox(dialogue_w, 650, 'Tous ces symboles me rappelle un certain tableau. En tout cas, on dirait que le bon c\'est le Si. Je me demande cela fait référence à quel numéro...', tableau_img);
+    tableau_dialogue = new DialogueBox(dialogue_w, 650, 'Tous ces symboles me rappellent un certain tableau. En tout cas, on dirait que le bon c\'est le Si. Je me demande cela fait référence à quel numéro...', tableau_img);
 
     this.book = new Item(230, 650, 75, 75, null, 'book', false, book_dialogue);
     this.tableau = new Item(600, 200, 350, 200, null, 'tableau', false, tableau_dialogue);
     this.hotte = new Item(100, 100, 350, 300, null, 'hotte', false, defi_dialogue);
-    this.sortie = new Item(850, 40, 100, 50, null, 'sortie', false, sortie_dialogue);
+    this.sortie = new Item(800, 10, 150, 150, exit_img, 'sortie', false, sortie_dialogue);
 
 
     this.items = [this.book, this.tableau, this.hotte, this.sortie];
@@ -54,7 +55,6 @@ function LaboratoryRoom() {
         for (var i = 0; i < this.items.length; i++) {
             this.items[i].show();
         }
-
 
     }
 
@@ -73,6 +73,10 @@ function LaboratoryRoom() {
         if (!something_is_hovered) {
             cursorObj.setState(0);
         }
+    }
+
+    this.keyReleased = function(key) {
+        // nothing
     }
 
 }

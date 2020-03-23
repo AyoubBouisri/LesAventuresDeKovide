@@ -30,11 +30,11 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
         this.button = null;
     }
 
-    this.show = function() {
+    this.show = function () {
 
         image(this.bg_img, this.x, this.y);
         this.buttonClose.show();
-        if (this.image != null || this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait') || this.message.startsWith('C\'est la direction')) {
+        if (this.image != null || this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait') || this.message.startsWith('C\'est la direction') || this.message.startsWith('Quel rat') || this.message.startsWith('Et si j\'avais nourrit')) {
             // draw image on the left and text on the right
             var barrel = ['greenbarrel', 'redbarrel', 'yellowbarrel'];
             if (this.item && this.item.name === 'usb') {
@@ -53,15 +53,14 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
 
 
 
-            } else if (this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait') || this.message.startsWith('C\'est la direction')) {
+            } else if (this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait bien une hotte') || this.message.startsWith('C\'est la direction') || this.message.startsWith('Quel rat') || this.message.startsWith('Et si j\'avais nourrit')) {
                 // show only text 
-
                 var text_width = this.w - 200;
                 var text_height = this.h / 2;
                 var text_x = this.x + this.w / 2 - text_width / 2;
                 var text_y = this.y + this.h / 2 - text_height / 2;
 
-            } else if (this.item != null && (this.item.name === 'book' || this.item.name === 'tableau')) {
+            } else if (this.item != null && (this.item.name === 'book' || this.item.name === 'tableau' || this.item.name === 'periodic table')) {
                 // show big image with text under
                 this.image = img.get();
                 if (this.item.name === 'book') {
@@ -70,6 +69,12 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
                     this.image.resize(img_w, img_h);
                     var img_x = this.x + this.w / 2 - img_w / 2;
                     var img_y = this.y + 90;
+                } else if (this.item.name === 'periodic table') {
+                    var img_w = this.w - 380;
+                    var img_h = this.h * 0.7;
+                    this.image.resize(img_w, img_h);
+                    var img_x = this.x + this.w / 2 - img_w / 2;
+                    var img_y = this.y + 130;
                 } else {
                     var img_w = this.w - 200;
                     var img_h = this.h - 250;
@@ -85,9 +90,12 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
                 var text_x = this.x + 70;
                 if (this.item.name === 'tableau') {
                     var text_y = img_y + img_h - 40;
+                } else if (this.item.name === 'periodic table') {
+                    var text_y = img_y + img_h - 200;
+                    text_height = this.h / 4;
+
                 } else {
                     var text_y = img_y + img_h;
-
                 }
 
 
@@ -118,7 +126,6 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
                 var text_height = 250;
                 var text_x = 525;
                 var text_y = 200;
-
 
 
             } else if (this.item && this.item.name === 'machine') {
@@ -176,9 +183,84 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
                     text(screen_text, screen_text_x, screen_text_y, screen_text_width, screen_text_height);
                 }
 
-
-
-
+            } else if (this.item && this.item.name === 'screwdriver') {
+                this.image = img.get();
+                var img_w = this.w / 3;
+                var img_h = this.h / 2;
+                this.image.resize(img_w, img_h);
+                var img_x = this.x + 70;
+                var img_y = this.y + this.h / 2 - this.image.height / 2 + 10;
+                image(this.image, img_x, img_y);
+                var text_width = this.w / 2 - 70;
+                var text_height = this.h / 2;
+                var text_x = this.x + this.w / 2 - 70;
+                var text_y = this.y + this.h / 2 - text_height / 2;
+                fill(254, 229, 153);
+            } else if (this.item && this.item.name === 'library') {
+                this.image = img.get();
+                var img_w = this.w * 0.3;
+                var img_h = this.h * 0.65;
+                this.image.resize(img_w, img_h);
+                var img_x = this.x + 70;
+                var img_y = this.y + this.h / 2 - this.image.height / 2 + 10;
+                image(this.image, img_x, img_y);
+                var text_width = this.w / 2 - 70;
+                var text_height = this.h / 2;
+                var text_x = this.x + this.w / 2 - 70;
+                var text_y = this.y + this.h / 2 - text_height / 2;
+                fill(254, 229, 153);
+            } else if (this.item && this.item.name === 'lock') {
+                this.image = img.get();
+                var img_w = this.w * 0.25;
+                var img_h = this.h * 0.5;
+                this.image.resize(img_w, img_h);
+                var img_x = this.x + 100;
+                var img_y = this.y + this.h / 2 - this.image.height / 2;
+                image(this.image, img_x, img_y);
+                var text_width = this.w / 2 - 70;
+                var text_height = this.h / 2;
+                var text_x = this.x + this.w / 2 - 70;
+                var text_y = this.y + this.h / 2 - text_height / 2;
+                fill(254, 229, 153);
+            } else if (this.item && this.item.name === 'grille') {
+                this.image = img.get();
+                var img_w = this.w * 0.35;
+                var img_h = this.h * 0.5;
+                this.image.resize(img_w, img_h);
+                var img_x = this.x + 70;
+                var img_y = this.y + this.h / 2 - this.image.height / 2 - 10;
+                image(this.image, img_x, img_y);
+                var text_width = this.w / 2 - 70;
+                var text_height = this.h / 2;
+                var text_x = this.x + this.w / 2 - 70;
+                var text_y = this.y + this.h / 2 - text_height / 2;
+                fill(254, 229, 153);
+            } else if (currentDialogue === grille_goback_dialogue) {
+                this.image = img.get();
+                var img_w = this.w * 0.06;
+                var img_h = this.h * 0.4;
+                this.image.resize(img_w, img_h);
+                var img_x = this.x + 180;
+                var img_y = this.y + this.h / 2 - this.image.height / 2;
+                image(this.image, img_x, img_y);
+                var text_width = this.w / 2 - 70;
+                var text_height = this.h / 2;
+                var text_x = this.x + this.w / 2 - 70;
+                var text_y = this.y + this.h / 2 - text_height / 2;
+                fill(254, 229, 153);
+            } else if (currentDialogue === fiole_dialogue) {
+                this.image = img.get();
+                var img_w = this.w * 0.2;
+                var img_h = this.h * 0.4;
+                this.image.resize(img_w, img_h);
+                var img_x = this.x + 120;
+                var img_y = this.y + this.h / 2 - this.image.height / 2;
+                image(this.image, img_x, img_y);
+                var text_width = this.w / 2 - 70;
+                var text_height = this.h / 2;
+                var text_x = this.x + this.w / 2 - 70;
+                var text_y = this.y + this.h / 2 - text_height / 2;
+                fill(254, 229, 153);
             } else {
                 this.image = img.get();
                 this.image.resize(this.w / 3, this.h / 3);
@@ -224,7 +306,7 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
 
     };
 
-    this.mouseOver = function(mouseX, mouseY) {
+    this.mouseOver = function (mouseX, mouseY) {
         if (this.buttonClose.contains(mouseX, mouseY)) {
             this.buttonClose.is_hovered = true;
 
@@ -246,7 +328,7 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
         }
     };
 
-    this.click = function(mouseX, mouseY) {
+    this.click = function (mouseX, mouseY) {
         if (this.contains(mouseX, mouseY)) {
             // if on close button close the dialogue
             if (this.buttonClose.contains(mouseX, mouseY)) {
@@ -258,13 +340,13 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
         }
     };
 
-    this.contains = function(x, y) {
+    this.contains = function (x, y) {
         if (x >= this.x && x <= (this.x + this.w) && y >= this.y && y <= this.y + this.h)
             return true;
         return false;
     };
 
-    this.setItem = function(item) {
+    this.setItem = function (item) {
         this.item = item;
         if (this.button != null) {
             this.button.item = item;

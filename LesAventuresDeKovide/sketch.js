@@ -5,6 +5,7 @@ var cursorObj;
 let cursor_basic, cursor_info;
 
 var itemHeld = null;
+var has_fiole = false;
 
 // global variables for the first room (office room). disgusting js
 var officeRoom, petshopRoom, treasureRoom, laboratoryRoom;
@@ -22,6 +23,8 @@ function preload() {
     office_background = loadImage("assets/officeBackground.png");
     petshop_background = loadImage("assets/petshopBackground.png");
     treasure_background = loadImage("assets/treasureBackground.png");
+    cage_background = loadImage("assets/cage.png");
+
 
     inventory_img = loadImage("assets/inventory.png");
     screwdriver_img = loadImage("assets/screwDriver.png");
@@ -30,6 +33,7 @@ function preload() {
     grille_img = loadImage("assets/grille.png");
     periodic_table_img = loadImage("assets/periodicTable.png");
     library_img = loadImage("assets/library.png");
+    knot_img = loadImage("assets/knot.png");
     green_barrel_img = loadImage("assets/greenBarrel.png");
     yellow_barrel_img = loadImage("assets/yellowBarrel.png");
     red_barrel_img = loadImage("assets/redBarrel.png");
@@ -39,12 +43,19 @@ function preload() {
     computer_screen_img = loadImage("assets/computerScreen.png");
     keypad_img = loadImage("assets/keypad.png");
 
+    exit_img = loadImage("assets/exit.png");
+
+
     explosion_img = loadImage("assets/boom.png");
 
     laboratory_background = loadImage("assets/laboratory_background.png");
     book_img = loadImage("assets/book.png");
     tableau_img = loadImage("assets/tableau_img.png");
     fiole_img = loadImage("assets/fiole.png");
+
+    kim_img = loadImage("assets/kim.png");
+    dead_mouse_img = loadImage("assets/deadMouse.png");
+    
 
 
     dialogue_img = loadImage("assets/dialogue.png");
@@ -69,6 +80,8 @@ function setup() {
     petshopRoom = new PetshopRoom();
     treasureRoom = new TreasureRoom();
     laboratoryRoom = new LaboratoryRoom();
+    ratsRoom = new RatsRoom();
+
     currentRoom = officeRoom;
 
 
@@ -168,13 +181,10 @@ function keyPressed(event) {
     }
 }
 
-function keyReleased(event) {
-    if (currentRoom && currentRoom.name === 'Bureau' || currentRoom && currentRoom.name === 'Animalerie') {
-        currentRoom.keyReleased(event);
-    }
-
+function keyReleased() {
     if (event.code === 'Space') {
         (inventory.isOpened) ? inventory.isOpened = false: inventory.isOpened = true;
-
+    } else if (currentRoom) {
+        currentRoom.keyReleased(key);
     }
 }
