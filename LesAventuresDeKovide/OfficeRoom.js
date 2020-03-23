@@ -30,15 +30,16 @@ function OfficeRoom() {
         currentRoom = treasureRoom;
         currentDialogue = null;
     }
-    screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on ne sait jamais quand il pourra me servir. Je ne vais pas oublier de le ramener quand j\'aurai terminé ! ', screwdriver_img, pickup_func, 'Ramasser');
-    rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir là ... Quelqu\'un l\'a peut-être oubliée ici. Pourquoi ne pas la prendre et lui redonner plus tard ! ', rope_img, pickup_func, 'Ramasser');
-    periodic_table_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'On dirait bien que c’est les 36 premiers éléments qui importe. J’imagine que chaque élément correspond à un numéro.\n Ex: Na = 11 ', periodic_table_img, null);
-    library_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah, une bien drôle de machine. Je crois que le livre nous indique comment la « nourrir ». ', library_img, null);
-    grille_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Une grille! Quel beau moyen de voyager dans une autre salle ni vu ni connu. Mais.. comment l\'ouvrir? ', grille_img, null);
-    grille_open_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah tiens! J\'ai réussi à retirer la grille avec le tournevis. Mais je n\'arrive pas bien à voir où ce petit couloir sombre va m\'amener.. Devrais-je y aller? ', grille_img, goto_petshop_func, 'Entrer');
-    lock_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Le trésor du médecin devrait se trouver derrière cette porte. J\'en suis convaincu! Mmm.. cette porte semble être barrée par un cadenas. Un code à trois lettres?? ', lock_img, lock_guess_func, 'Ouvrir');
-    lock_guess_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n ____ ____ ____', lock_img, null);
-    lock_success_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n  K     I     M\n\n Le cadenas est ouvert! ', lock_img, goto_treasure_func, 'Entrer');
+
+    var screwdriver_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Woah ! Un tournevis étoilé ! Je devrais peut-être le prendre ... on ne sait jamais quand il pourra me servir. Je ne vais pas oublier de le ramener quand j\'aurai terminé ! ', screwdriver_img, pickup_func, 'Ramasser');
+    var rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je me demande comment cette corde a bien pu finir là ... Quelqu\'un l\'a peut-être oubliée ici. Pourquoi ne pas la prendre et lui redonner plus tard ! ', rope_img, pickup_func, 'Ramasser');
+    var periodic_table_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'On dirait bien que c’est les 36 premiers éléments qui importe. J’imagine que chaque élément correspond à un numéro.\n Ex: Na = 11 ', periodic_table_img, null);
+    var library_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah, une bien drôle de machine. Je crois que le livre nous indique comment la « nourrir ». ', library_img, null);
+    var grille_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Une grille! Quel beau moyen de voyager dans une autre salle ni vu ni connu. Mais.. comment l\'ouvrir? ', grille_img, null);
+    var grille_open_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ah tiens! J\'ai réussi à retirer la grille avec le tournevis. Mais je n\'arrive pas bien à voir où ce petit couloir sombre va m\'amener.. Devrais-je y aller? ', grille_img, goto_petshop_func, 'Entrer');
+    var lock_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Le trésor du médecin devrait se trouver derrière cette porte. J\'en suis convaincu! Mmm.. cette porte semble être barrée par un cadenas. Un code à trois lettres?? ', lock_img, lock_guess_func, 'Ouvrir');
+    var lock_guess_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n ____ ____ ____', lock_img, null);
+    var lock_success_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n  K     I     M\n\n Le cadenas est ouvert! ', lock_img, goto_treasure_func, 'Entrer');
 
 
     // define items hardcoded the fuck out
@@ -81,19 +82,11 @@ function OfficeRoom() {
 
     this.mouseReleased = function(mouseX, mouseY) {
         if (itemHeld.name === 'screwdriver') {
+            console.log(currentDialogue);
+            console.log(grille_dialogue);
             let grille_index = this.items.indexOf(this.grille);
-
-            if (currentDialogue != null) {
-                //if (currentDialogue.message.startsWith('Une')) {
-                if (currentDialogue.contains(mouseX, mouseY)) {
-
-                    currentDialogue = grille_open_dialogue;
-                    this.items[grille_index].dialogueBox = grille_open_dialogue;
-                    inventory.removeItem(itemHeld); // Sh
-                }
-            }
-
-            if (this.items[grille_index].contains(mouseX, mouseY)) {
+            if (currentDialogue === grille_dialogue && currentDialogue.contains(mouseX, mouseY) || this.items[grille_index].contains(mouseX, mouseY)) {
+                currentDialogue = grille_open_dialogue;
                 this.items[grille_index].dialogueBox = grille_open_dialogue;
                 inventory.removeItem(itemHeld); // Should we remove the item after using it?
             }
