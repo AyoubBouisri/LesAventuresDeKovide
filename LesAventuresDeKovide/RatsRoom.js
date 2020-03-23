@@ -26,39 +26,33 @@ function RatsRoom() {
         currentDialogue = null;
     }
 
-
-    rat_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'C\'est la direction pour retourner à l\'animalerie', null, goto_petshop_func, 'Retourner');
-    kim_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'C\'est la direction pour retourner à l\'animalerie', null, goto_petshop_func, 'Retourner');
-    dead_rat_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ouff... ce n’était pas la bonne souris. Il n’y a plus de vaccin. Ne reste plus qu’à retourner dans la salle d’attente, mais pas de trésor.', null, reset_game_func, 'Réessayer');
+    rat_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Quel rat devrais-je donner à boire avec ma fiole ? ', null);
+    kim_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Wow! La souris va super bien. Le vaccin a fonctionné. Quel indice permettrait d\'ouvrir la salle au trésor.', kim_img, goto_petshop_func, 'Retourner');
+    dead_rat_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Ouff... ce n’était pas la bonne souris. Il n’y a plus de vaccin. Ne reste plus qu’à retourner dans la salle d’attente, mais pas de trésor.', dead_mouse_img, reset_game_func, 'Réessayer');
 
     exit_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'C\'est la direction pour retourner à l\'animalerie', null, goto_petshop_func, 'Retourner');
 
 
-    // this.cage = new Item(80, 250, 100, 100, null, 'cage', false, basic_dialogue);
-    this.rat7 = new Item(60, 220, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat8 = new Item(200, 220, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat9 = new Item(360, 220, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat10 = new Item(510, 220, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat11 = new Item(650, 220, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat12 = new Item(790, 220, 130, 100, null, 'dead', false, basic_dialogue);
+    this.rat7 = new Item(60, 220, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat8 = new Item(200, 220, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat9 = new Item(360, 220, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat10 = new Item(510, 220, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat11 = new Item(650, 220, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat12 = new Item(790, 220, 130, 100, null, 'dead', false, rat_dialogue);
 
-    this.rat13 = new Item(60, 380, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat14 = new Item(200, 380, 100, 100, null, 'alive', false, basic_dialogue);
-    this.rat15 = new Item(360, 380, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat16 = new Item(510, 380, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat17 = new Item(650, 380, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat18 = new Item(790, 380, 130, 100, null, 'dead', false, basic_dialogue);
+    this.rat13 = new Item(60, 380, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat14 = new Item(200, 380, 100, 100, null, 'alive', false, rat_dialogue);
+    this.rat15 = new Item(360, 380, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat16 = new Item(510, 380, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat17 = new Item(650, 380, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat18 = new Item(790, 380, 130, 100, null, 'dead', false, rat_dialogue);
 
-    this.rat19 = new Item(60, 530, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat20 = new Item(200, 530, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat21 = new Item(360, 530, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat22 = new Item(510, 530, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat23 = new Item(650, 530, 100, 100, null, 'dead', false, basic_dialogue);
-    this.rat24 = new Item(790, 530, 130, 100, null, 'dead', false, basic_dialogue);
-
-
-
-
+    this.rat19 = new Item(60, 530, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat20 = new Item(200, 530, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat21 = new Item(360, 530, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat22 = new Item(510, 530, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat23 = new Item(650, 530, 100, 100, null, 'dead', false, rat_dialogue);
+    this.rat24 = new Item(790, 530, 130, 100, null, 'dead', false, rat_dialogue);
 
     this.exit = new Item(850, 40, 130, 80, null, 'sortie', false, exit_dialogue);
     this.alldeadrats = [this.rat7, this.rat8, this.rat9, this.rat10, this.rat11, this.rat12, this.rat13, this.rat15, this.rat16, this.rat17, this.rat18, this.rat19, this.rat20, this.rat21, this.rat22, this.rat23, this.rat24];
@@ -98,9 +92,10 @@ function RatsRoom() {
         let kim_index = this.items.indexOf(this.rat14);
         if (itemHeld.name === 'fiole') {
             if (this.items[kim_index].contains(mouseX, mouseY)) {
-                console.log('kim');
+                this.items[kim_index].dialogueBox = kim_dialogue;
+                inventory.removeItem(itemHeld);
             } else if (this.feedBadRat()){
-                console.log('bad');
+                inventory.removeItem(itemHeld);
             }
         }
     }
@@ -116,10 +111,15 @@ function RatsRoom() {
     this.feedBadRat = function () {
         for (let rat of this.alldeadrats) {
             if (rat.contains(mouseX, mouseY)) {
+                let index = this.items.indexOf(rat);
+                this.items[index].dialogueBox = dead_rat_dialogue;
                 return true;
             }
         }
         return false;
+    }
+
+    this.keyReleased = function(key) {
     }
 
 

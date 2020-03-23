@@ -1,6 +1,9 @@
 function TreasureRoom() {
     this.backgroundImg = treasure_background;
     this.name = 'Trésor';
+    var dialogue_w = 900;
+    var dialogue_h = 500;
+    basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
     this.items = [];
     this.message = 
         'FÉLICITATION!!!\n' +
@@ -8,9 +11,13 @@ function TreasureRoom() {
         ' Mais au final, ça demeure que du papier de toilette, sans réel intérêt pour un super scout comme Kovide.\n'+
         'Il retourne vers la salle d’attente, satisfait d\’avoir relevé le défi du laboratoire.';
 
+    final_dialogue = new DialogueBox(dialogue_w, dialogue_h, this.message, null);
+
     this.show = function () {
         inventory.isOpened = false;
         image(this.backgroundImg, 0, 0);
+
+        currentDialogue = final_dialogue;
 
         // INSERT DIALOG BOX HERE
     };
@@ -20,6 +27,9 @@ function TreasureRoom() {
     }
 
     this.mouseReleased = function (mouseX, mouseY) {
-
     }
+
+    this.keyReleased = function(key) {
+    }
+
 }

@@ -50,6 +50,10 @@ function preload() {
     tableau_img = loadImage("assets/tableau_img.png");
     fiole_img = loadImage("assets/fiole.png");
 
+    kim_img = loadImage("assets/kim.png");
+    dead_mouse_img = loadImage("assets/deadMouse.png");
+    
+
 
     dialogue_img = loadImage("assets/dialogue.png");
     closeBtn_img = loadImage("assets/closeBtn.png");
@@ -75,7 +79,7 @@ function setup() {
     laboratoryRoom = new LaboratoryRoom();
     ratsRoom = new RatsRoom();
 
-    currentRoom = ratsRoom;
+    currentRoom = officeRoom;
 
 
     // set up cursor

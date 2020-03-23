@@ -34,7 +34,7 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
 
         image(this.bg_img, this.x, this.y);
         this.buttonClose.show();
-        if (this.image != null || this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait') || this.message.startsWith('C\'est la direction')) {
+        if (this.image != null || this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait') || this.message.startsWith('C\'est la direction') || this.message.startsWith('Quel rat')) {
             // draw image on the left and text on the right
             var barrel = ['greenbarrel', 'redbarrel', 'yellowbarrel'];
             if (this.item && this.item.name === 'usb') {
@@ -53,7 +53,7 @@ function DialogueBox(w, h, message, img, button_on_click_func, button_text) {
 
 
 
-            } else if (this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait bien une hotte') || this.message.startsWith('C\'est la direction')) {
+            } else if (this.message.startsWith('Kovide entre ses mains') || this.message.startsWith('On dirait bien une hotte') || this.message.startsWith('C\'est la direction') || this.message.startsWith('Quel rat')) {
                 // show only text 
                 var text_width = this.w - 200;
                 var text_height = this.h / 2;
