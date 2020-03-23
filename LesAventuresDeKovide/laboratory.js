@@ -17,6 +17,7 @@ function LaboratoryRoom() {
 
     function ramasser_fiole() {
         // ajouter fiole a linventaire
+        has_fiole = true;
         basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
         this.fiole = new Item(0, 0, 100, 100, fiole_img, 'fiole', false, basic_dialogue);
 
@@ -32,7 +33,7 @@ function LaboratoryRoom() {
         currentDialogue = null;
     }
 
-    sortie_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'C\'est la direction pour retourner à l\'animalerie ou le médecin garde ses rats.', null, retourner_animalerie, 'Sortir');
+    sortie_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'C\'est la direction pour retourner à l\'animalerie où le médecin garde ses rats.', null, retourner_animalerie, 'Sortir');
     defi_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Kovide entre ses mains dans les gants en caoutchouc, mais ses bras sont trop petits pour atteindre la fiole. Mets tes mitaines et fait un noeud coulant dans ta corde à noeud. Quand tu as réussis, clique sur « Réussi » !', null, reussir_defi, 'Réussi');
     fiole_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Avec le noeud coulant, Kovide a précipité la fiole dans le bac pour récupération. Wow aucunee goutte n\'a été perdue. Kovide est un super scout !', fiole_img, ramasser_fiole, 'Ramasser');
     hotte_vide_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'On dirait bien une hotte de laboratoire qui permet l\'extraction des vapeurs toxiques des produits utilisés lors des manipulations du médecin.');

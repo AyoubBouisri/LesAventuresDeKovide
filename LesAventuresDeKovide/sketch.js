@@ -5,6 +5,7 @@ var cursorObj;
 let cursor_basic, cursor_info;
 
 var itemHeld = null;
+var has_fiole = false;
 
 // global variables for the first room (office room). disgusting js
 var officeRoom, petshopRoom, treasureRoom, laboratoryRoom;
@@ -22,6 +23,8 @@ function preload() {
     office_background = loadImage("assets/officeBackground.png");
     petshop_background = loadImage("assets/petshopBackground.png");
     treasure_background = loadImage("assets/treasureBackground.png");
+    cage_background = loadImage("assets/cage.png");
+
 
     inventory_img = loadImage("assets/inventory.png");
     screwdriver_img = loadImage("assets/screwDriver.png");
@@ -30,6 +33,7 @@ function preload() {
     grille_img = loadImage("assets/grille.png");
     periodic_table_img = loadImage("assets/periodicTable.png");
     library_img = loadImage("assets/library.png");
+    knot_img = loadImage("assets/knot.png");
     green_barrel_img = loadImage("assets/greenBarrel.png");
     yellow_barrel_img = loadImage("assets/yellowBarrel.png");
     red_barrel_img = loadImage("assets/redBarrel.png");
@@ -69,7 +73,9 @@ function setup() {
     petshopRoom = new PetshopRoom();
     treasureRoom = new TreasureRoom();
     laboratoryRoom = new LaboratoryRoom();
-    currentRoom = officeRoom;
+    ratsRoom = new RatsRoom();
+
+    currentRoom = ratsRoom;
 
 
     // set up cursor

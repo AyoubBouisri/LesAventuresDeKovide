@@ -1,7 +1,7 @@
 function PetshopRoom() {
     this.backgroundImg = petshop_background;
     this.name = 'Animalerie';
-    this.enter_petshop = false;
+    this.enter_petshop = true;
     var password = '';
     // Create a bunch of dialogue boxes and link them with the right objects
     // one dialogue box per object should do the trick see DialogueBox.js
@@ -52,16 +52,20 @@ function PetshopRoom() {
         currentDialogue = null;
     }
 
+    var goto_rat_func = function() {
+        currentRoom = ratsRoom;
+        currentDialogue = null;
+    }
+
     var reset_game_func = function() {
         setup();
         currentDialogue = null;
-
     }
 
     rope_missing_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'J\'ai réussi à atteindre la nouvelle salle! Oh non.. la grille est trop haute pour sortir, mais comment descendre? Je pense avoir aperçu une corde dans le bureau. Je devrais y retourner pour le prendre!', grille_img, goto_office_func, 'Retourner');
     grille_rope_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'J\'ai réussi à atteindre la nouvelle salle! Oh non.. la grille est trop haute pour sortir, mais comment descendre? Ah oui, la corde! Étant un bon louveteau, je suis capable de faire un noeud de batelier pour fixer la corde.', rope_img, has_rope_func, 'Continuer');
     boatman_knot_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Défi : Utilise ta corde à noeud pour faire un noeud de batelier.\n Quand tu as réussis, clique sur\n « Réussi » pour poursuivre l’aventure.', rope_img, close_dialogue_func, 'Réussi');
-    grille_goback_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je peux retourner au bureau grâce à mon noeud de batelier! Devrais-je y retourner ? ', grille_img, goto_office_func, 'Retourner');
+    grille_goback_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je peux retourner au bureau grâce à mon noeud de batelier! Devrais-je y retourner ? ', knot_img, goto_office_func, 'Retourner');
 
     green_barrel_pick_up_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je pense avoir déjà vu ces barils dans un des livres de la bibliothèque du docteur. Si je me souviens bien, il fallait verser un baril dans la machine, mais lequel ? Ce baril biologique ?', green_barrel_img, pickup_barrel_func, 'Ramasser');
     red_barrel_pick_up_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Je pense avoir déjà vu ces barils dans un des livres de la bibliothèque du docteur. Si je me souviens bien, il fallait verser un baril dans la machine, mais lequel ? Ce baril chimique ?', red_barrel_img, pickup_barrel_func, 'Ramasser');
@@ -82,6 +86,8 @@ function PetshopRoom() {
     keypad_guess_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n ____ ____ ____ ____', keypad_img, null);
     keypad_success_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Entrer un code :\n  6     7     8     0\n\n Le cadenas est ouvert! ', keypad_img, goto_lab_func, 'Entrer');
 
+    rats_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'Que vois-je ? On dirait des rats de laboratoire! Chaque rat possède leur propre cage numéroté avec un nom qui lui est assigné. ', cage_background, goto_rat_func, 'Regarder');
+
 
     this.grille = new Item(730, 40, 190, 100, null, 'grille', false, rope_missing_dialogue);
     this.greenBarrel = new Item(220, 270, 110, 150, green_barrel_img, 'greenbarrel', true, green_barrel_pick_up_dialogue);
@@ -93,7 +99,9 @@ function PetshopRoom() {
     this.usb = new Item(740, 355, 55, 55, usb_img, 'usb', true, usb_dialogue);
     this.keypad = new Item(560, 175, 70, 95, null, 'keypad', false, keypad_dialogue);
 
-    this.items = [this.grille, this.greenBarrel, this.redBarrel, this.yellowBarrel, this.machine, this.computer, this.keypad];
+    this.cage = new Item(80, 250, 100, 100, null, 'cage', false, rats_dialogue);
+
+    this.items = [this.grille, this.greenBarrel, this.redBarrel, this.yellowBarrel, this.machine, this.computer, this.keypad, this.cage];
 
 
     this.show = function() {
@@ -106,7 +114,7 @@ function PetshopRoom() {
         this.takeBarrel();
 
         // Fix dialogue picture
-        grille_goback_dialogue.setItem(this.grille);
+        // grille_goback_dialogue.setItem(this.grille);
         green_barrel_dialogue.setItem(this.greenBarrel);
         red_barrel_dialogue.setItem(this.redBarrel);
         yellow_barrel_dialogue.setItem(this.yellowBarrel);
