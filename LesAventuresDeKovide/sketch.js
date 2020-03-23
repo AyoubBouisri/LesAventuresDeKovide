@@ -79,7 +79,7 @@ function setup() {
     laboratoryRoom = new LaboratoryRoom();
     ratsRoom = new RatsRoom();
 
-    currentRoom = officeRoom;
+    currentRoom = treasureRoom;
 
 
     // set up cursor
