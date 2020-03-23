@@ -34,7 +34,9 @@ function preload() {
     yellow_barrel_img = loadImage("assets/yellowBarrel.png");
     red_barrel_img = loadImage("assets/redBarrel.png");
     machine_img = loadImage("assets/machine.png");
-
+    machine_open_img = loadImage("assets/machineOpen.png");
+    usb_img = loadImage("assets/usb.png");
+    computer_screen_img = loadImage("assets/computerScreen.png");
 
 
     dialogue_img = loadImage("assets/dialogue.png");
@@ -58,7 +60,7 @@ function setup() {
     officeRoom = new OfficeRoom();
     petshopRoom = new PetshopRoom();
     treasureRoom = new TreasureRoom();
-    currentRoom = officeRoom;
+    currentRoom = petshopRoom;
 
 
     // set up cursor
