@@ -57,8 +57,8 @@ function Item(posX, posY, width, height, base_image, name, can_pick_up, dialogue
 
             }
         } else {
-            fill(0, 200, 0, 50);
-            rect(this.posX, this.posY, this.w, this.h);
+            // fill(0, 200, 0, 50);
+            // rect(this.posX, this.posY, this.w, this.h);
             if (this.is_hovered) {
                 fill(0, 200, 0, 200);
                 ellipse(this.posX + this.w / 2, this.posY + this.h / 2, 30, 30);

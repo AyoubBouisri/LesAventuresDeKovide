@@ -54,7 +54,7 @@ function RatsRoom() {
     this.rat23 = new Item(650, 530, 100, 100, null, 'dead', false, rat_dialogue);
     this.rat24 = new Item(790, 530, 130, 100, null, 'dead', false, rat_dialogue);
 
-    this.exit = new Item(850, 40, 130, 80, null, 'sortie', false, exit_dialogue);
+    this.exit = new Item(820, 40, 150, 150, exit_img, 'sortie', false, exit_dialogue);
     this.alldeadrats = [this.rat7, this.rat8, this.rat9, this.rat10, this.rat11, this.rat12, this.rat13, this.rat15, this.rat16, this.rat17, this.rat18, this.rat19, this.rat20, this.rat21, this.rat22, this.rat23, this.rat24];
     this.items = [this.exit];
 

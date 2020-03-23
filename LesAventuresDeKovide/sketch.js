@@ -43,6 +43,9 @@ function preload() {
     computer_screen_img = loadImage("assets/computerScreen.png");
     keypad_img = loadImage("assets/keypad.png");
 
+    exit_img = loadImage("assets/exit.png");
+
+
     explosion_img = loadImage("assets/boom.png");
 
     laboratory_background = loadImage("assets/laboratory_background.png");

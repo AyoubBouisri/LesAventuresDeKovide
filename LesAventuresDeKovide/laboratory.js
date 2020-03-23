@@ -44,7 +44,7 @@ function LaboratoryRoom() {
     this.book = new Item(230, 650, 75, 75, null, 'book', false, book_dialogue);
     this.tableau = new Item(600, 200, 350, 200, null, 'tableau', false, tableau_dialogue);
     this.hotte = new Item(100, 100, 350, 300, null, 'hotte', false, defi_dialogue);
-    this.sortie = new Item(850, 40, 100, 50, null, 'sortie', false, sortie_dialogue);
+    this.sortie = new Item(800, 10, 150, 150, exit_img, 'sortie', false, sortie_dialogue);
 
 
     this.items = [this.book, this.tableau, this.hotte, this.sortie];
