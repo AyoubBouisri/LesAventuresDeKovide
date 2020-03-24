@@ -8,21 +8,13 @@ function RatsRoom() {
     var dialogue_h = 500;
     basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
 
-    var pickup_func = function (old_item) {
-        console.log(old_item);
-        inventory.addItem(old_item);
-        index = currentRoom.items.indexOf(old_item);
-        currentRoom.items.splice(index, 1);
-        //close dialogue
-        currentDialogue = null;
-    }
-
     var goto_petshop_func = function () {
         currentRoom = petshopRoom;
         currentDialogue = null;
     }
 
     var reset_game_func = function() {
+        music.stop();
         setup();
         currentDialogue = null;
     }

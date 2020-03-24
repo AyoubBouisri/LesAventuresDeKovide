@@ -12,7 +12,6 @@ function PetshopRoom() {
     basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
 
     var pickup_func = function(old_item) {
-        console.log(old_item);
         inventory.addItem(old_item);
         index = currentRoom.items.indexOf(old_item);
         currentRoom.items.splice(index, 1);
@@ -59,6 +58,7 @@ function PetshopRoom() {
     }
 
     var reset_game_func = function() {
+        music.stop();
         setup();
         currentDialogue = null;
     }

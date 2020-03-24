@@ -25,6 +25,8 @@ function preload() {
     treasure_background = loadImage("assets/treasureBackground.png");
     cage_background = loadImage("assets/cage.png");
 
+    blackboard_img = loadImage("assets/blackboard.png");
+    kovide_img = loadImage("assets/Kovide.png");
 
     inventory_img = loadImage("assets/inventory.png");
     screwdriver_img = loadImage("assets/screwDriver.png");
@@ -75,15 +77,16 @@ function setup() {
 
     //setup inventory
     inventory = new Inventory();
-
+    
     // setup rooms and current room
+    menu = new Menu();
     officeRoom = new OfficeRoom();
     petshopRoom = new PetshopRoom();
-    treasureRoom = new TreasureRoom();
     laboratoryRoom = new LaboratoryRoom();
     ratsRoom = new RatsRoom();
+    treasureRoom = new TreasureRoom();
 
-    currentRoom = officeRoom;
+    currentRoom = menu;
 
 
     // set up cursor
@@ -132,6 +135,10 @@ function mouseMoved() {
 function mouseClicked() {
     // interaction outside the inventory
     var itemsTemp = currentRoom.items;
+
+    if (currentRoom === menu) {
+        currentRoom.mouseClicked(mouseX, mouseY);
+    }
 
     if (currentDialogue != null) {
         // A dialogue box is open, interact with that and the inventory nothing else
@@ -190,7 +197,7 @@ function keyPressed(event) {
 }
 
 function keyReleased() {
-    if (event.code === 'Space') {
+    if (event.code === 'Space' && currentRoom !== menu) {
         inventory.closed_once = true;
         (inventory.isOpened) ? inventory.isOpened = false: inventory.isOpened = true;
     } else if (currentRoom) {

@@ -9,7 +9,6 @@ function OfficeRoom() {
     basic_dialogue = new DialogueBox(dialogue_w, dialogue_h, 'whatever', null);
     // Dialog buttons
     var pickup_func = function(old_item) {
-        console.log(old_item);
         inventory.addItem(old_item);
         index = currentRoom.items.indexOf(old_item);
         currentRoom.items.splice(index, 1);
@@ -88,8 +87,6 @@ function OfficeRoom() {
 
     this.mouseReleased = function(mouseX, mouseY) {
         if (itemHeld.name === 'screwdriver') {
-            console.log(currentDialogue);
-            console.log(grille_dialogue);
             let grille_index = this.items.indexOf(this.grille);
             if (currentDialogue === grille_dialogue && currentDialogue.contains(mouseX, mouseY) || this.items[grille_index].contains(mouseX, mouseY)) {
                 currentDialogue = grille_open_dialogue;
