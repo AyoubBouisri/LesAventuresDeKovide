@@ -55,7 +55,7 @@ function preload() {
 
     kim_img = loadImage("assets/kim.png");
     dead_mouse_img = loadImage("assets/deadMouse.png");
-    
+
 
 
     dialogue_img = loadImage("assets/dialogue.png");
@@ -65,6 +65,7 @@ function preload() {
     cursor_basic = loadImage("assets/handCursor.png");
     cursor_info = loadImage("assets/magnifier.png");
 
+    music = loadSound("assets/music.mp3");
 }
 
 function setup() {
@@ -89,6 +90,9 @@ function setup() {
     cursorObj = new CursorObj();
     cursorObj.show();
 
+    //play music
+
+    music.play();
 }
 
 function draw() {
@@ -103,6 +107,10 @@ function draw() {
         currentDialogue.show();
     }
     this.inventory.show();
+
+    if (!music.isPlaying()) {
+        music.play();
+    }
 
 }
 
@@ -183,6 +191,7 @@ function keyPressed(event) {
 
 function keyReleased() {
     if (event.code === 'Space') {
+        inventory.closed_once = true;
         (inventory.isOpened) ? inventory.isOpened = false: inventory.isOpened = true;
     } else if (currentRoom) {
         currentRoom.keyReleased(key);

@@ -5,7 +5,7 @@ function Inventory() {
     this.items = [];
     this.isOpened = true;
     this.posY = 650;
-
+    this.closed_once = false;
     this.contains_item = function(item) {
         if (this.items.includes(item)) {
             return true;
@@ -56,9 +56,15 @@ function Inventory() {
 
     this.show = function() {
         if (this.isOpened) {
+            if (!this.closed_once) {
+                fill(184, 144, 97);
+                rect(WIDTH / 2 - 250, this.posY + 30, 500, 50, 10, 10);
+                fill(255);
+                textSize(25);
+                textAlign(CENTER, CENTER);
+                text('Appuie sur \'Espace\' pour fermer l\'inventaire ', WIDTH / 2 - 250, this.posY + 50, 500);
+            }
 
-            fill(254, 229, 153, 200);
-            rect(50, this.posY + 30, 300, 50);
             image(inventory_img, 20, this.posY);
 
             for (let item of this.items) {
